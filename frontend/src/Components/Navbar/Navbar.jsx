@@ -12,13 +12,16 @@ const Navbar = () => {
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a style={{color: 'white'}} class="nav-link active" aria-current="page" href="/">Home</a>
+                            <a style={{ color: 'white' }} class="nav-link active" aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a style={{color: 'white'}} class="nav-link" href="/login">Login</a>
+                            <a style={{ color: 'white' }} class="nav-link" href="/login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a style={{color: 'white'}} class="nav-link" href="/signup">Signup</a>
+                            <a style={{ color: 'white' }} class="nav-link" href="/signup">Signup</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style={{ color: 'grey' }} class="nav-link disabled" href="/my-pictures">My Pictures</a>
                         </li>
                     </ul>
                 </div>
