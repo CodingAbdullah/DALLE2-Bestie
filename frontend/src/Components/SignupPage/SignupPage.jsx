@@ -1,16 +1,38 @@
 import React, { useState } from 'react';
 import Alert from '../Alert/Alert';
+import axios from 'axios';
 
 const SignupPage = () => {
-    const [emailAddress, updateEmailAddress] = useState('');
+    const [email, updateEmailAddress] = useState('');
     const [password, updatePassword] = useState('');
     const [firstName, updateFirstName] = useState('');
     const [lastName, updateLastName] = useState('');
     const [setSignupAlert, updateSignupAlert] = useState(false);
 
+    const signupHandler = (e) => {
+        e.preventDefault();
+        const body = JSON.stringify({
+            firstName,
+            lastName,
+            email,
+            password
+        });
 
-    const signupHandler = () => {
+        const options = {
+            method: 'POST',
+            body,
+            headers: {
+                'content-type' : 'application/json'
+            }
+        }
 
+        axios.post("http://localhost:5000/signup", options)
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
 
     return (
@@ -29,7 +51,7 @@ const SignupPage = () => {
                         <input style={{ marginLeft: '25%', width: '50%' }} type="email" className="form-control" onChange={e => updateEmailAddress(e.target.value)} />
                         <label style={{ marginTop: '1rem' }}>Password </label>
                         <input style={{ marginLeft: '25%', width: '50%' }} type="password" className="form-control" onChange={e => updatePassword(e.target.value)} />
-                        <button style={{ display: 'inline', marginTop: '1rem' }} class='btn btn-primary'>Signup</button>
+                        <button style={{ display: 'inline', marginTop: '1rem' }} type="submit" class='btn btn-primary'>Signup</button>
                     </form>
                 </div>
             </div>

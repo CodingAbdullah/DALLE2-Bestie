@@ -1,14 +1,39 @@
 import React, { useState } from 'react';
 import Alert from '../Alert/Alert';
+import { useNavigate } from 'react-router';
 import axios from 'axios';
 
 const LoginPage = () => {
-    const [emailAddress, updateEmailAddress] = useState('');
+    const [email, updateEmailAddress] = useState('');
     const [password, updatePassword] = useState('');
     const [setLoginAlert, updateLoginAlert] = useState(false);
 
-    const loginHandler = () => {
+    const navigate = useNavigate();
 
+    const loginHandler = (e) => {
+        e.preventDefault();
+
+        const body = JSON.stringify({
+            email,
+            password
+        });
+
+        const options = {
+            method: 'POST',
+            body,
+            headers : {
+                'content-type' : 'application.json'
+            }
+        };
+
+        axios.post('http://localhost:5000/login', options)
+        .then(response => {
+            console.log(response);
+            navigate("/");
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 
     return (

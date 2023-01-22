@@ -54,5 +54,5 @@ exports.signupController = (req, res) => {
                 });
             }
         }
-    })
+    });
 }
