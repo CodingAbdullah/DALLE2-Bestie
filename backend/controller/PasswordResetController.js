@@ -1,0 +1,4 @@
+exports.PasswordResetController = (req, res) => {
+
+    
+}
