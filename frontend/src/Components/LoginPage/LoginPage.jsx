@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import Alert from '../Alert/Alert';
+import axios from 'axios';
 
 const LoginPage = () => {
     const [emailAddress, updateEmailAddress] = useState('');
     const [password, updatePassword] = useState('');
+    const [setLoginAlert, updateLoginAlert] = useState(false);
 
     const loginHandler = () => {
 
@@ -12,6 +15,7 @@ const LoginPage = () => {
         <div className='login-page'>
             <div style={{ paddingTop: '2.5rem', paddingBottom: '2.5rem', backgroundColor: '#EAFCFC' }} className="jumbotron">
                 <div className="container">
+                    { setLoginAlert === true ? <Alert type='login' /> : null }
                     <form onSubmit={ loginHandler }>
                         <h2>Login</h2>
                         <p>Enter in credentials to proceed</p>
