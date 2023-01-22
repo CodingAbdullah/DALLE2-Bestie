@@ -7,7 +7,6 @@ const MyPicturesPage = () => {
             
         </div>
     )
-
 }
 
 export default MyPicturesPage;

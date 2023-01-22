@@ -15,6 +15,9 @@ const Navbar = () => {
                             <a style={{ color: 'white' }} class="nav-link active" aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
+                            <a style={{ color: 'white' }} class="nav-link" href="/about">About</a>
+                        </li>
+                        <li class="nav-item">
                             <a style={{ color: 'white' }} class="nav-link" href="/login">Login</a>
                         </li>
                         <li class="nav-item">
