@@ -21,6 +21,9 @@ const Navbar = () => {
                             <a style={{ color: 'white' }} class="nav-link" href="/signup">Signup</a>
                         </li>
                         <li class="nav-item">
+                            <a style={{ color: 'grey' }} class="nav-link disabled" href="/search-pictures">Search Pictures</a>
+                        </li>
+                        <li class="nav-item">
                             <a style={{ color: 'grey' }} class="nav-link disabled" href="/my-pictures">My Pictures</a>
                         </li>
                     </ul>
