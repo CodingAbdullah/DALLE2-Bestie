@@ -9,7 +9,7 @@ const URI = "mongodb+srv://owner:" + process.env.DB_PASSWORD + "@ai-user-databas
 
 const app = express();
 
-app.listen(process.env.PORT || 8080, () => {
+app.listen(process.env.PORT || 8080, 'localhost', () => {
     console.log("Listening to PORT " + process.env.PORT || 8080);
 });
 
@@ -19,6 +19,11 @@ mongoose.connect(URI).then(() => {
 .catch(err => {
     console.log("Error occurred in signing in to Mongo DB Atlas " + err);
 });
+
+// Set up req-res structure
+app.use(express.json({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
+
 
 app.use(cors()); // Enabling CORS
 app.use("/", loginRoute);
