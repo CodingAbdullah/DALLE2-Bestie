@@ -12,7 +12,7 @@ exports.loginController = (req, res) => {
         }
         else {
             if (result.length === 0) {
-                res.status(401).json({
+                res.status(200).json({
                     message: "No user found",
                     userExist: false,
                     password: false
@@ -27,7 +27,7 @@ exports.loginController = (req, res) => {
                     }
                     else {
                         if (!result) {
-                            res.status(401).json({
+                            res.status(200).json({
                                 message: "Invalid password",
                                 userExist: true,
                                 password: false
@@ -35,7 +35,9 @@ exports.loginController = (req, res) => {
                         }
                         else {
                             res.status(200).json({
-                                message: "Email and password verified!"
+                                message: "Email and password verified!",
+                                userExist: true,
+                                password: true
                             });
                         }
                     }

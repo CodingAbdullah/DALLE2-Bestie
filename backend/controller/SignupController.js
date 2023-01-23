@@ -9,14 +9,12 @@ exports.signupController = (req, res) => {
         if (err) {
             res.status(400).json({
                 message: "Unable to query db",
-                doesExist: false
             });
         }
         else {
             if (docs.length > 0) {
-                res.status(401).json({
+                res.status(200).json({
                     message: "User already exists!",
-                    isExists: true
                 });
             }
             else {
@@ -24,7 +22,6 @@ exports.signupController = (req, res) => {
                     if (err) { 
                         res.status(400).json({
                             message: "Unable to sign up User",
-                            doesExist: false
                         });
                     }
                     else {
@@ -32,7 +29,6 @@ exports.signupController = (req, res) => {
                             if (err) {
                                 res.status(400).json({ 
                                     message: "Unable to sign up user",
-                                    doesExist: false
                                 });
                             }
                             else {
@@ -45,7 +41,6 @@ exports.signupController = (req, res) => {
                                 .catch(err => {
                                     res.status(400).json({
                                         message: err,
-                                        doesExist: false
                                     });
                                 })
                             }
