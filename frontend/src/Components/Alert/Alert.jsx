@@ -7,13 +7,33 @@ const Alert = (props) => {
     let alertType = '';
 
     switch ( type ) {
-        case "login":
-            msg = 'Invalid login! Please enter valid credentials or signup.';
+        case "login-user-does-not-exist":
+            msg = 'Invalid login! User does not exist.';
+            alertType = 'danger';
+            break;
+        case "login-password-incorrect":
+            msg = "Invalid login! Invalid password.";
+            alertType = 'danger';
+            break;
+        case "login-external-error":
+            msg = "Invalid login, but not due to credentials, an external error was found"
             alertType = 'warning';
             break;
-        case "signup":
-            msg = 'Invalid signup! Please enter valid credentials.'
-            alertType = 'warning';
+        case "login-success":
+            msg = "Login successful!"
+            alertType = 'success';
+            break;
+        case "signup-user-exists":
+            msg = 'Invalid signup! An account with this email has already been registered!'
+            alertType = 'danger';
+            break;
+        case "signup-user-success":
+            msg = "User successfully registered! Login to continue"
+            alertType = "success";
+            break;
+        case "signup-external-error":
+            msg = "User cannot be signed up right now, external error";
+            alertType = "warning";
             break;
         case "forgotPassword":
             msg = "No such email exists, please enter a valid email address for password reset.";

@@ -6,7 +6,7 @@ import axios from 'axios';
 const LoginPage = () => {
     const [email, updateEmailAddress] = useState('');
     const [password, updatePassword] = useState('');
-    const [setLoginAlert, updateLoginAlert] = useState(false);
+    const [setLoginAlert, updateLoginAlert] = useState('');
 
     const navigate = useNavigate();
 
@@ -28,11 +28,19 @@ const LoginPage = () => {
 
         axios.post('http://localhost:5000/login', options)
         .then(response => {
-            console.log(response);
-            navigate("/");
+            if (response.status === 200 && response.data.userExist === true && response.data.password === false){
+                updateLoginAlert('login-password-incorrect');
+            }
+            else if (response.status === 200 && response.data.userExist === false && response.data.password === false) {
+                updateLoginAlert('login-user-does-not-exist');
+            }
+            else if (response.status === 200 && response.data.userExist === true && response.data.password === true) {
+                updateLoginAlert('login-success');
+            }
+            // Set redux functions here later, test alerts for now
         })
-        .catch(err => {
-            console.log(err);
+        .catch(() => {
+            updateLoginAlert('login-external-error');
         });
     }
 
@@ -40,7 +48,7 @@ const LoginPage = () => {
         <div className='login-page'>
             <div style={{ paddingTop: '2.5rem', paddingBottom: '2.5rem', backgroundColor: '#EAFCFC' }} className="jumbotron">
                 <div className="container">
-                    { setLoginAlert === true ? <Alert type='login' /> : null }
+                    { setLoginAlert === '' ? null : <Alert type={ setLoginAlert } />  }
                     <form onSubmit={ loginHandler }>
                         <h2>Login</h2>
                         <p>Enter in credentials to proceed</p>

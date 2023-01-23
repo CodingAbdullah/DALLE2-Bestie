@@ -7,7 +7,7 @@ const SignupPage = () => {
     const [password, updatePassword] = useState('');
     const [firstName, updateFirstName] = useState('');
     const [lastName, updateLastName] = useState('');
-    const [setSignupAlert, updateSignupAlert] = useState(false);
+    const [setSignupAlert, updateSignupAlert] = useState('');
 
     const signupHandler = (e) => {
         e.preventDefault();
@@ -27,19 +27,25 @@ const SignupPage = () => {
         }
 
         axios.post("http://localhost:5000/signup", options)
-        .then(response => {
-            console.log(response.data);
+        .then((response) => {
+        
+            if (response.status === 201) {
+                updateSignupAlert('signup-user-success');
+            }
+            else if (response.status === 200){
+                updateSignupAlert('signup-user-exists');
+            }
         })
-        .catch(err => {
-            console.log(err);
-        })
+        .catch(() => {
+            updateSignupAlert('signup-external-error');
+        });
     }
 
     return (
         <div className='signup-page'>
             <div style={{ paddingTop: '2.5rem', paddingBottom: '2.5rem', backgroundColor: '#EAFCFC' }} className="jumbotron">
                 <div className="container">
-                    { setSignupAlert === true ? <Alert type='signup' /> : null }
+                    { setSignupAlert === '' ? null : <Alert type={ setSignupAlert } /> }
                     <form onSubmit={ signupHandler }>
                         <h2>Signup</h2>
                         <p>Enter in signup details to proceed</p>
