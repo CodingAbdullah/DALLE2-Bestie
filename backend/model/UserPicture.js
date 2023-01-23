@@ -13,7 +13,7 @@ const UserPicture = new mongoose.Schema({
     time : {
         type: Date,
         required: true,
-        default: Data.now
+        default: Date.now
     }
 });
 
