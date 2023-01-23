@@ -3,6 +3,11 @@
     pointer-events: none;
 }
 
+.redux-logo {
+  height: 3vmin;
+  pointer-events: none;
+}
+
 .footer-container {
   margin-top: 3.0rem;
 }
@@ -15,7 +20,7 @@
  }
 
 @media (prefers-reduced-motion: no-preference) {
-    .react-logo {
+    .react-logo, .redux-logo {
       animation: App-logo-spin infinite 10s linear;
     }
 }
