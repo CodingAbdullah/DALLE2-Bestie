@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Alert from '../Alert/Alert';
 import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
+import authAction from '../../redux/actions/authAction';
 import axios from 'axios';
 
 const LoginPage = () => {
@@ -9,15 +11,15 @@ const LoginPage = () => {
     const [setLoginAlert, updateLoginAlert] = useState('');
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const loginHandler = (e) => {
+    const loginHandler = async (e) => {
         e.preventDefault();
 
-        const body = JSON.stringify({
-            email,
-            password
-        });
-
+        // Redux implementation
+        dispatch(authAction(email, password));
+        
+        /*
         const options = {
             method: 'POST',
             body,
@@ -42,6 +44,7 @@ const LoginPage = () => {
         .catch(() => {
             updateLoginAlert('login-external-error');
         });
+        */
     }
 
     return (

@@ -1,19 +1,33 @@
 let initialState = {
-    email : '',
+    token : null,
     isLoggedIn: false,
-    token : null
+    email : ''
 }
 
-exports.authReducer = (initialState, action) => {
+const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case "LOGIN":
-
-        break;
+            return {
+                ...state,
+                token: action.payload.token,
+                isLoggedIn: true,
+                email : action.payload.email
+            }
         case "LOGOUT":
- 
-        break;
+            return {
+                ...state,
+                token : null,
+                isLoggedIn: false,
+                email : ''
+            }
         default:
-            initialState.email = '';
-            break;
+            return {
+                ...state,
+                token: null,
+                isLoggedIn: false,
+                email: ''
+            }
     }
 }
+
+export default authReducer;
