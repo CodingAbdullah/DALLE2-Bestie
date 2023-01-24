@@ -1,7 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux'; 
+import { useNavigate } from 'react-router';
+import store from '../../redux/store/store';
 
 const HomePage = () => {
     const [imageRequest, updateImageRequest] = useState('');
+    const navigate = useNavigate();
+    const selector = useSelector(state => state.isLoggedIn);
+
+    useEffect(() => {
+        if (!selector) {
+            navigate("/");
+        }
+    }, [])
 
     const formHandler = () => {
 

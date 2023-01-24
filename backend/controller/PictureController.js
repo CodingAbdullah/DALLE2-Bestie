@@ -45,11 +45,21 @@ exports.createAPicture = (req, res) => {
         apiKey: process.env.DALLE_KEY
       });
     
-    let openai = new OpenAIApi(configuration);
-
-    let imageURL = openai.createImage({
+    new OpenAIApi(configuration).createImage({
         prompt: question,
         n: 1,
-        size: size === 'small' ? '256x256' : ( size === 'medium' ? '512x512' : '1024x1024' )
+        size: size === 'small' ? '256x256' : ( size === 'medium' ? '512x512' : '1024x1024' ) // small, medium, or large
+    })
+    .then(response => {
+        console.log(response.data);
+        res.status(200).json({
+            message: 'Success',
+            url : response.data.data
+        });
+    })
+    .catch(err => {
+        res.status(401).json({
+            message: err
+        });
     });
 }
