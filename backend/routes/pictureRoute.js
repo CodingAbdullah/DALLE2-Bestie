@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.post("/fetch-pictures", auth.auth, pictureController.fetchMyPictures);
 router.post("/insert-picture", auth.auth, pictureController.insertPicture);
-router.pose("/create-picture", pictureController.createAPicture);
+router.post("/create-picture", pictureController.createAPicture);
 
 module.exports = router;
