@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Alert from '../Alert/Alert';
 import axios from 'axios';
+import validator from 'validator';
 
 const SignupPage = () => {
     const [email, updateEmailAddress] = useState('');
@@ -25,20 +26,26 @@ const SignupPage = () => {
                 'content-type' : 'application/json'
             }
         }
-
-        axios.post("http://localhost:5000/signup", options)
-        .then((response) => {
         
-            if (response.status === 201) {
-                updateSignupAlert('signup-user-success');
-            }
-            else if (response.status === 200){
-                updateSignupAlert('signup-user-exists');
-            }
-        })
-        .catch(() => {
-            updateSignupAlert('signup-external-error');
-        });
+        // Client-side validation of email address entered, using third party library
+        if (validator.isEmail(email)){
+            axios.post("http://localhost:5000/signup", options)
+            .then((response) => {
+            
+                if (response.status === 201) {
+                    updateSignupAlert('signup-user-success');
+                }
+                else if (response.status === 200){
+                    updateSignupAlert('signup-user-exists');
+                }
+            })
+            .catch(() => {
+                updateSignupAlert('signup-external-error');
+            });
+        }
+        else {
+            updateSignupAlert('signup-incorrect');
+        }
     }
 
     return (

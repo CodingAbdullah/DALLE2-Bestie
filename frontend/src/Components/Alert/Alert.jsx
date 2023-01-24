@@ -35,11 +35,15 @@ const Alert = (props) => {
             msg = "User cannot be signed up right now, external error";
             alertType = "warning";
             break;
-        case "forgotPassword":
+        case "signup-incorrect":
+            msg = "Invalid email address, please enter a valid one"
+            alertType = "warning";
+            break;
+        case "forgot-password":
             msg = "No such email exists, please enter a valid email address for password reset.";
             alertType = 'warning';
             break;
-        case "retrievedEmail":
+        case "retrieved-email":
             msg = "A verified code has been sent to this email, please enter below to proceed";
             alertType = 'primary';
             break;
