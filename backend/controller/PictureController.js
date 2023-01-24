@@ -1,3 +1,5 @@
+require("dotenv").config({ path: '../.env' });
+const { Configuration, OpenAIApi } = require("openai");
 const UserPicture = require("../model/UserPicture");
 
 exports.fetchMyPictures = (req, res) => {
@@ -33,4 +35,21 @@ exports.insertPicture = (req, res) => {
             message: "Picture could not be saved to database"
         });
     })
+}
+
+exports.createAPicture = (req, res) => {
+    const { question, size } = JSON.parse(req.body.body);
+
+    // Set up configuration using OpenAI
+    const configuration = new Configuration({
+        apiKey: process.env.DALLE_KEY
+      });
+    
+    let openai = new OpenAIApi(configuration);
+
+    let imageURL = openai.createImage({
+        prompt: question,
+        n: 1,
+        size: size === 'small' ? '256x256' : ( size === 'medium' ? '512x512' : '1024x1024' )
+    });
 }
