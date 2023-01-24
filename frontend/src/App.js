@@ -8,6 +8,7 @@ import LoginPage from './Components/LoginPage/LoginPage';
 import SignupPage from './Components/SignupPage/SignupPage';
 import Footer from './Components/Footer/Footer';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ForgotPasswordPage from './Components/ForgotPasswordPage/ForgotPasswordPage';
 
 const App = () => {
   
@@ -18,10 +19,11 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<HomePage />}></Route>
           <Route exact path="/about" element={<AboutPage />}></Route>
+          <Route exact path="/forgot-password" element={<ForgotPasswordPage />}></Route>
           <Route exact path="/login" element={<LoginPage />}></Route>
-          <Route exact path="/signup" element={<SignupPage />}></Route>
           <Route exact path="/my-pictures" element={<MyPicturesPage />}></Route>
           <Route exact path="/search-pictures" element={<SearchPicturesPage />}></Route>
+          <Route exact path="/signup" element={<SignupPage />}></Route>
         </Routes>
       </Router>
       <Footer />
