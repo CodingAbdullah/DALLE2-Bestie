@@ -31,7 +31,7 @@ const ForgotPasswordPage = () => {
                 }
             })
             .catch(() => {
-                updateForgotPasswordAlert('');
+                updateForgotPasswordAlert('forgot-password-external-error');
             });
         }
         else {

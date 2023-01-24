@@ -43,6 +43,10 @@ const Alert = (props) => {
             msg = "No such email exists, please enter a valid email address for password reset.";
             alertType = 'warning';
             break;
+        case "forgot-password-external-error":
+            msg = "Password cannot be reset right now";
+            alertType = 'warning';
+            break;
         case "retrieved-email":
             msg = "A verified code has been sent to this email, please enter below to proceed";
             alertType = 'primary';
