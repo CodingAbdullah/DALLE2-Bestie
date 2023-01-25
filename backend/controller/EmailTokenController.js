@@ -6,7 +6,19 @@ const jwt = require("jsonwebtoken");
 
 // Take the verified token from SMTP server, encrypt using JWT, store to db. Upon verification, verify if it is not expired
 exports.addEmailToken = (req, res) => {
-    const { email, token } = JSON.parse(req.body.body);
+    const { email } = JSON.parse(req.body.body);
+
+    let token = uuid.v4(); // Generate a random uuid token using version 4 to send as verification code
+    let message = "For password reset, this is your verification code : " + <b>{ token }</b>;
+
+    // Create transport using nodemailer for sending email with code
+    const transport = nodemailer.createTransport({
+        service: 'gmail',
+        auth : {
+            user: process.env.USER,
+            password: process.env.PASSWORD
+        }
+    });
 
     // Verify if User already has a token 
     EmailToken.find({ email }, (err, docs) => {
@@ -27,8 +39,23 @@ exports.addEmailToken = (req, res) => {
                 
                 emailToken.save()
                 .then(() => {
-                    res.status(201).json({
-                        message: "Token found, updated email token with new one"
+                    // Send verification code via email 
+                    transport.sendMail({
+                        from: process.env.USER,
+                        to: email,
+                        subject: 'Verification Code for Password reset for OpenAI Image Generator site',
+                        html: `<h1>Verification Code</h1>
+                            <p>${message}</p>`
+                    })
+                    .then(() => {
+                        res.status(201).json({
+                            message: "Token found, updated email token with new one"
+                        });
+                    })
+                    .catch(err => {
+                        res.status(400).json({
+                            message: "Verification code could not be sent " + err
+                        });
                     });
                 })
                 .catch((err) => {
@@ -46,8 +73,23 @@ exports.addEmailToken = (req, res) => {
 
                 emailToken.save()
                 .then(() => {
-                    res.status(201).json({
-                        message: "Token created and saved to db for verification"
+                    // Send verification code via email 
+                    transport.sendMail({
+                        from: process.env.USER,
+                        to: email,
+                        subject: 'Verification Code for Password reset for OpenAI Image Generator site',
+                        html: `<h1>Verification Code</h1>
+                            <p>${message}</p>`
+                    })
+                    .then(() => {
+                        res.status(201).json({
+                            message: "Token found, updated email token with new one"
+                        });
+                    })
+                    .catch(err => {
+                        res.status(400).json({
+                            message: "Verification code could not be sent " + err
+                        });
                     });
                 })
                 .catch((err) => {
@@ -114,41 +156,4 @@ exports.verifyEmailToken = (req, res) => {
             }
         }
     });
-}
-
-exports.sendTokenEmail = (req, res) => {
-    const { email } = JSON.parse(req.body.body);
-
-    let token = uuid.v4(); // Generate a random token to send as verification code
-    let message = "For password reset, this is your verification code : " + <b>{ token }</b>;
-
-    // Create transport using nodemailer for sending email with code
-    const transport = nodemailer.createTransport({
-        service: 'gmail',
-        auth : {
-            user: process.env.USER,
-            password: process.env.PASSWORD
-        }
-    });
-
-    transport.sendMail({
-        from: process.env.USER,
-        to: email,
-        subject: 'Verification Code for Password reset for OpenAI Image Generator site',
-        html: `<h1>Verification Code</h1>
-              <p>${message}</p>`
-    })
-    .then(() => {
-        res.status(200).json({
-            message: "Verification code sent"
-        });
-    })
-    .catch(err => {
-        res.status(400).json({
-            message: "Verification code could not be sent " + err
-        });
-    })
-
-
-
 }
