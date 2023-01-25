@@ -8,11 +8,11 @@ const Alert = (props) => {
 
     switch ( type ) {
         case "login-user-does-not-exist":
-            msg = 'Invalid login! User does not exist.';
+            msg = 'Invalid login! User does not exist';
             alertType = 'danger';
             break;
         case "login-password-incorrect":
-            msg = "Invalid login! Invalid password.";
+            msg = "Invalid login! Invalid password";
             alertType = 'danger';
             break;
         case "login-external-error":
@@ -40,8 +40,12 @@ const Alert = (props) => {
             alertType = "warning";
             break;
         case "forgot-password":
-            msg = "No such email exists, please enter a valid email address for password reset.";
+            msg = "No such email exists, please enter a valid email address for password reset";
             alertType = 'warning';
+            break;
+        case "forgot-password-gmail-requirement":
+            msg = "Only Gmail addresses supported for password resets, at the moment";
+            alertType = "warning";
             break;
         case "forgot-password-external-error":
             msg = "Password cannot be reset right now";

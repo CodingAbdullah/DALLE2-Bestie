@@ -8,31 +8,39 @@ const ForgotPasswordPage = () => {
     const [setForgotPasswordAlert, updateForgotPasswordAlert] = useState('');
 
     const forgotPasswordHandler = () => {
-        if (validator.isEmail(email)){
-            const body = JSON.stringify({
-                email
-            });
-
-            const options = {
-                method: 'POST',
-                body,
-                headers: {
-                    'content-type' : 'application/json'
-                }
+        if (validator.isEmail(email)) {
+            
+            // Split on @ of the address and take the second element for comparison
+            if (email.split("@")[1].trim() !== 'gmail.com'){
+                updateForgotPasswordAlert('forgot-password-gmail-requirement');
             }
-            // If email is valid, prepare to verify using database, if so proceed to update and reset password, if not throw alert
-            axios.post("http://localhost:5000/user-lookup", options)
-            .then(response => {
-                if (response.status === 200 && response.data.doesExist){
-                    updateForgotPasswordAlert('');
+            else {
+                const body = JSON.stringify({
+                    email
+                });
+
+                const options = {
+                    method: 'POST',
+                    body,
+                    headers: {
+                        'content-type' : 'application/json'
+                    }
                 }
-                else {
-                    updateForgotPasswordAlert('forgot-password');
-                }
-            })
-            .catch(() => {
-                updateForgotPasswordAlert('forgot-password-external-error');
-            });
+
+                // If email is valid, prepare to verify using database, if so proceed to update and reset password, if not throw alert
+                axios.post("http://localhost:5000/user-lookup", options)
+                .then(response => {
+                    if (response.status === 200 && response.data.doesExist){
+                        updateForgotPasswordAlert('');
+                    }
+                    else {
+                        updateForgotPasswordAlert('forgot-password');
+                    }
+                })
+                .catch(() => {
+                    updateForgotPasswordAlert('forgot-password-external-error');
+                });
+            }
         }
         else {
             updateForgotPasswordAlert('forgot-password');
@@ -47,6 +55,7 @@ const ForgotPasswordPage = () => {
                     <form onSubmit={ forgotPasswordHandler }>
                         <h2>Password Reset</h2>
                         <p>Enter in the email address below for password reset</p>
+                        <p>Please note: Only gmail addresses are supported at the moment</p>
                         <label style={{ marginTop: '2rem' }}>Email Address </label>
                         <input style={{ marginLeft: '25%', width: '50%' }} type="email" className="form-control" onChange={e => updateEmailAddress(e.target.value)} />
                         <button style={{ display: 'inline', marginTop: '1rem' }} className='btn btn-primary'>Reset Password</button>

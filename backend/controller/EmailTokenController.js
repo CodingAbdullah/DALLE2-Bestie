@@ -83,7 +83,7 @@ exports.addEmailToken = (req, res) => {
                     })
                     .then(() => {
                         res.status(201).json({
-                            message: "Token found, updated email token with new one"
+                            message: "Token added"
                         });
                     })
                     .catch(err => {
