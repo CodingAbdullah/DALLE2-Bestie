@@ -51,9 +51,17 @@ const Alert = (props) => {
             msg = "Password cannot be reset right now";
             alertType = 'warning';
             break;
+        case "forgot-password-expired-token":
+            msg = "Verification code is not valid or it has expired";
+            alertType = 'warning';
+            break;
         case "retrieved-email":
             msg = "A verified code has been sent to this email, please enter below to proceed";
             alertType = 'primary';
+            break;
+        case "forgot-password-reset-success":
+            msg = "Password to this associated email has been successfully updated!";
+            alertType = 'success';
             break;
         default:
             break;

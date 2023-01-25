@@ -9,7 +9,7 @@ exports.addEmailToken = (req, res) => {
     const { email } = JSON.parse(req.body.body);
 
     let token = uuid.v4(); // Generate a random uuid token using version 4 to send as verification code
-    let message = "For password reset, this is your verification code : " + <b>{ token }</b>;
+    let message = `For password reset, this is your verification code : <b>${ token }</b>`;
 
     // Create transport using nodemailer for sending email with code
     const transport = nodemailer.createTransport({
@@ -45,7 +45,7 @@ exports.addEmailToken = (req, res) => {
                         to: email,
                         subject: 'Verification Code for Password reset for OpenAI Image Generator site',
                         html: `<h1>Verification Code</h1>
-                            <p>${message}</p>`
+                               <p>${message}</p>`
                     })
                     .then(() => {
                         res.status(201).json({
@@ -79,7 +79,7 @@ exports.addEmailToken = (req, res) => {
                         to: email,
                         subject: 'Verification Code for Password reset for OpenAI Image Generator site',
                         html: `<h1>Verification Code</h1>
-                            <p>${message}</p>`
+                               <p>${message}</p>`
                     })
                     .then(() => {
                         res.status(201).json({
