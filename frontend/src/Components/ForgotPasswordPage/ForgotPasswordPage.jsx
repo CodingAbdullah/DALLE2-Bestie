@@ -33,26 +33,17 @@ const ForgotPasswordPage = () => {
                     }
                 }
 
-                // If email is valid, prepare to verify using database, if so proceed to update and reset password, if not throw alert
-                axios.post("http://localhost:5000/user-lookup", options)
-                .then(response => {
-                    if (response.status === 200 && response.data.doesExist){
-                        updateForgotPasswordAlert('');
-                        updateVerification(true);
-
-                        // Once verified, add token to database
-                        axios.post("http://localhost:5000/add-email-token", options)
-                        .then(() => {
-                            updateCodeCreated(true);
-                            updateForgotPasswordAlert('retrieved-email'); // Verification code sent, display verify panel
-                        })
-                        .catch(() => {
-                            updateForgotPasswordAlert('forgot-password-external-error');
-                        });
+                axios.post("http://localhost:5000/add-email-token", options)
+                .then((response) => {
+                    if (response.status === 200 && response.data.doesExist === false) {
+                        updateCodeCreated(false);
+                        updateVerification(false);
+                        updateForgotPasswordAlert('forgot-password');
                     }
                     else {
-                        updateForgotPasswordAlert('forgot-password');
-                        updateVerification(false);
+                        updateForgotPasswordAlert('retrieved-email');
+                        updateVerification(true);
+                        updateCodeCreated(true);
                     }
                 })
                 .catch(() => {
@@ -84,7 +75,7 @@ const ForgotPasswordPage = () => {
         };
 
         // Verify token along with email address
-        axios.post('http://localhost:5000/verify-email-token', options)
+        axios.post('http://localhost:5000/verify-token', options)
         .then(response => {
             if (response.status === 200 && response.data.verified) {
                 // Reset password with new body, options, and axios call
