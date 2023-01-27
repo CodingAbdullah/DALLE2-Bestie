@@ -15,7 +15,7 @@ exports.verifyEmailTokenMiddleware = (req, res, next) => {
                 let tokenData = docs[0]; // Grab the first and only token in the db for the user
 
                 // Verify this jwt token
-                jwt.verify(tokenData.token, process.env.SECRET, (err, decoded) => {
+                jwt.verify(tokenData.data, process.env.SECRET, (err, decoded) => {
                     if (err) {
                         UserToken.deleteOne({ email }); // Delete old token that is expired and send response
 

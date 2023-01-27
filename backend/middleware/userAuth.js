@@ -12,7 +12,7 @@ exports.verifyUserMiddleware = (req, res, next) => {
         }
         else {
             // Pass handle to the succeeding controller
-            if (docs.length > 0) {
+            if (docs.length > 0 && email.split("@")[1].trim() === 'gmail.com') {
                 next();
                 /*
                     res.status(200).json({
@@ -20,6 +20,12 @@ exports.verifyUserMiddleware = (req, res, next) => {
                         doesExist: true
                     });
                 */
+            }
+            else if (docs.length > 0 ) {
+                res.status(200).json({
+                    message: "User does exist, but is not a gmail account",
+                    doesExist: true
+                });
             }
             else {
                 res.status(200).json({

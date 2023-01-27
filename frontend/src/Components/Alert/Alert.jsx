@@ -37,14 +37,14 @@ const Alert = (props) => {
             break;
         case "signup-incorrect":
             msg = "Invalid email address, please enter a valid one"
-            alertType = "warning";
+            alertType = "danger";
             break;
         case "forgot-password":
-            msg = "No such email exists, please enter a valid email address for password reset";
-            alertType = 'warning';
+            msg = "No registered email exists, please enter a valid email address for password reset";
+            alertType = 'danger';
             break;
         case "forgot-password-gmail-requirement":
-            msg = "Only Gmail addresses supported for password resets, at the moment";
+            msg = "Only Gmail addresses supported for password resets at the moment";
             alertType = "warning";
             break;
         case "forgot-password-external-error":
@@ -53,7 +53,7 @@ const Alert = (props) => {
             break;
         case "forgot-password-expired-token":
             msg = "Verification code is not valid or it has expired";
-            alertType = 'warning';
+            alertType = 'danger';
             break;
         case "retrieved-email":
             msg = "A verified code has been sent to this email, please enter below to proceed";

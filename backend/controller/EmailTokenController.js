@@ -16,7 +16,7 @@ exports.addEmailToken = (req, res) => {
         service: 'gmail',
         auth : {
             user: process.env.USER,
-            password: process.env.PASSWORD
+            pass: process.env.PASSWORD
         }
     });
 
@@ -53,6 +53,7 @@ exports.addEmailToken = (req, res) => {
                         });
                     })
                     .catch(err => {
+                        console.log(err);
                         res.status(400).json({
                             message: "Verification code could not be sent " + err
                         });
