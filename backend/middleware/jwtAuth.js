@@ -2,7 +2,7 @@
 require('dotenv').config({ path: '../../.env' });
 const jwt = require("jsonwebtoken");
 
-exports.auth = (req, res, next) => {
+exports.verifyJWTMiddleware = (req, res, next) => {
     const { token } = req.headers.Authorization.split(" ")[1]; // "Authorization <token>"
 
     jwt.verify(token, process.env.SECRET, (err, result) => {

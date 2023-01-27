@@ -1,7 +1,7 @@
 require("dotenv").config({ path: '../.env' });
 const jwt = require("jsonwebtoken");
 
-exports.verifyEmailTokenMiddleware = (req, res) => {
+exports.verifyEmailTokenMiddleware = (req, res, next) => {
     const { email, token } = JSON.parse(req.body.body);
 
     UserToken.find({ email }, (err, docs) => {
@@ -28,13 +28,15 @@ exports.verifyEmailTokenMiddleware = (req, res) => {
                         // If still active, verify the payload of the token to the token user entered to complete process
                         if ( decoded.data === token ) {
 
-                            // Once verified, delete token from database
+                            // Once verified, delete token from database and pass control to the succeeding middleware
                             UserToken.deleteOne({ email });
-                            
-                            res.status(200).json({
-                                message: "Verified verification code",
-                                verified: true
-                            });
+                            next();
+                            /*
+                                res.status(200).json({
+                                    message: "Verified verification code",
+                                    verified: true
+                                });
+                            */
                         }
                         else {
                             // User did not enter the right verification code, hence redirect back
