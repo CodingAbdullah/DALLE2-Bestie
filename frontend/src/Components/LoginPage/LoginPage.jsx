@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Alert from '../Alert/Alert';
 import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
-import authAction from '../../redux/actions/authAction';
+import { login } from '../../redux/reducer/authReducer';
 import axios from 'axios';
 
 const LoginPage = () => {
@@ -17,7 +17,7 @@ const LoginPage = () => {
         e.preventDefault();
 
         // Redux implementation
-        dispatch(authAction(email, password));
+        dispatch(login(email, password));
         
         /*
         const options = {

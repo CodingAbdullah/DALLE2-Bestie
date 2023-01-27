@@ -10,7 +10,8 @@ exports.loginController = (req, res) => {
         if (err) {
             res.status(400).json({ 
                 message: "Cannot lookup db",
-                token: null
+                token: null,
+                user: null
             });
         }
         else {
@@ -19,6 +20,7 @@ exports.loginController = (req, res) => {
                     message: "No user found",
                     userExist: false,
                     password: false,
+                    user: null,
                     token: null
                 });
             }
@@ -27,7 +29,8 @@ exports.loginController = (req, res) => {
                     if (err) {
                         res.status(400).json({
                             message: "Unable to trace password",
-                            token: null
+                            token: null,
+                            user: null
                         });
                     }
                     else {
@@ -36,7 +39,8 @@ exports.loginController = (req, res) => {
                                 message: "Invalid password",
                                 userExist: true,
                                 password: false,
-                                token: null
+                                token: null,
+                                user: null
                             });
                         }
                         else {
@@ -46,7 +50,8 @@ exports.loginController = (req, res) => {
                                 message: "Email and password verified!",
                                 userExist: true,
                                 password: true,
-                                token: jwtToken
+                                token: jwtToken,
+                                user: email
                             });
                         }
                     }

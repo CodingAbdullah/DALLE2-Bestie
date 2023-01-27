@@ -14,7 +14,7 @@ const login = async (user) => {
         }
     };
 
-    await axios.post("http://localhost:5000/login", options); 
+    return await axios.post("http://localhost:5000/login", options).data; 
 }
 
 const authService = {

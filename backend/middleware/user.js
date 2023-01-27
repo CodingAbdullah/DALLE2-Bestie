@@ -1,6 +1,6 @@
 const User = require("../model/User");
 
-exports.userController = (req, res) => {
+exports.verifyUserMiddleware = (req, res) => {
     const { email } = JSON.parse(req.body.body);
 
     // Search up a User using the email requested in the database to see if any docs exist

@@ -4,7 +4,7 @@ import authService from '../service/authService';
 // Using RTK to create slices of state to be held by one complex reducer, and others, simple reducers with actions that change state
 // Asynchronous data calls are handled with function returns and thunk middleware
 
-const auth = createAsyncThunk('auth/login', 
+export const login = createAsyncThunk('auth/login', 
     async (user, thunkAPI) => {
         try {
             return await authService.login(user);
@@ -33,19 +33,19 @@ let authSlice = createSlice({
         }
     },
     extraReducers : (builder) => {
-        builder.addCase(auth.pending, (state) => {
+        builder.addCase(login.pending, (state) => {
             state.user = null;
             state.isLoading = true;
             state.error = false;
             state.token = '';
         })
-        .addCase(auth.fulfilled, (state, action) => {
+        .addCase(login.fulfilled, (state, action) => {
             state.user = action.payload.user;
             state.isLoading = false;
             state.error = false;
             state.token = action.payload.token;
         })
-        .addCase(auth.rejected, (state, action) => {
+        .addCase(login.rejected, (state, action) => {
             state.user = null;
             state.isLoading = false;
             state.error = action.error;
@@ -54,6 +54,5 @@ let authSlice = createSlice({
     }
 });
 
-export const { logout } = authSlice.actions;
-
+export const { logout }  = authSlice.actions;
 export default authSlice.reducer;

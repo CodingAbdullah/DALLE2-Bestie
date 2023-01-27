@@ -84,7 +84,7 @@ const ForgotPasswordPage = () => {
         };
 
         // Verify token along with email address
-        axios.post('http://localhost:5000/verify-token', options)
+        axios.post('http://localhost:5000/verify-email-token', options)
         .then(response => {
             if (response.status === 200 && response.data.verified) {
                 // Reset password with new body, options, and axios call
@@ -127,7 +127,7 @@ const ForgotPasswordPage = () => {
                     <form onSubmit={ forgotPasswordHandler }>
                         <h2>Password Reset</h2>
                         <p>Enter in the email address below for password reset</p>
-                        <p>Please note: Only gmail addresses are supported at the moment</p>
+                        <p>Please note: Only <b>GMail</b> addresses are supported at the moment</p>
                         <label style={{ marginTop: '2rem' }}>Email Address </label>
                         { 
                             isVerified ? 
