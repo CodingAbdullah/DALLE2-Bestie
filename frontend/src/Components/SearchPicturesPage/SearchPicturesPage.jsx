@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'; 
 import { useNavigate } from 'react-router';
 
-const HomePage = () => {
+const SearchPicturesPage = () => {
     const [imageRequest, updateImageRequest] = useState('');
     const navigate = useNavigate();
     const selector = useSelector(state => state.auth.user);
@@ -40,4 +40,4 @@ const HomePage = () => {
     )
 }
 
-export default HomePage;
+export default SearchPicturesPage;
