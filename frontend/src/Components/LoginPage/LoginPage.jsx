@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Alert from '../Alert/Alert';
 import { useNavigate } from 'react-router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/reducer/authReducer';
-import axios from 'axios';
 
 const LoginPage = () => {
     const [email, updateEmailAddress] = useState('');
@@ -12,39 +11,32 @@ const LoginPage = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const userSelector = useSelector(state => state.auth.user);
+    const errorSelector = useSelector(state => state.auth.error);
+    const loadingSelector = useSelector(state => state.auth.isLoading);
+
+    // Return to home page if user has already logged in
+    useEffect(() => {
+        if (userSelector !== null) {
+            navigate('/');
+        }
+    }, [userSelector, errorSelector, navigate]);
 
     const loginHandler = async (e) => {
         e.preventDefault();
 
-        // Redux implementation
+        // Dispatch login action using redux
         dispatch(login({ email, password }));
-        
-        /*
-        const options = {
-            method: 'POST',
-            body,
-            headers : {
-                'content-type' : 'application.json'
-            }
-        };
 
-        axios.post('http://localhost:5000/login', options)
-        .then(response => {
-            if (response.status === 200 && response.data.userExist === true && response.data.password === false){
-                updateLoginAlert('login-password-incorrect');
-            }
-            else if (response.status === 200 && response.data.userExist === false && response.data.password === false) {
-                updateLoginAlert('login-user-does-not-exist');
-            }
-            else if (response.status === 200 && response.data.userExist === true && response.data.password === true) {
-                updateLoginAlert('login-success');
-            }
-            // Set redux functions here later, test alerts for now
-        })
-        .catch(() => {
-            updateLoginAlert('login-external-error');
-        });
-        */
+        if (loadingSelector === 'done' && userSelector === null) {
+            updateLoginAlert('login-user-password-incorrect');
+        }
+        else if (userSelector === 'done' && userSelector !== null){
+            navigate("/");
+        }
+        else if (errorSelector !== null) {
+            updateLoginAlert('login-external-error')
+        }
     }
 
     return (

@@ -1,7 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import './Navbar.css';
 
 const Navbar = () => {
+    const isLoggedInStateSelector = useSelector(state => state.auth.user);
+
+    useEffect(() => {
+        // Do nothing except refresh whenever user is logged
+    }, [isLoggedInStateSelector]);
+
+    const conditionalRenderingOnUserStateSelector = isLoggedInStateSelector === null ?
+        <>                        
+            <li class="nav-item">
+                <a style={{ color: 'white' }} class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a style={{ color: 'white' }} class="nav-link" href="/signup">Signup</a>
+            </li>
+            <li class="nav-item">
+                <a style={{ color: 'grey' }} class="nav-link disabled" href="/search-pictures">Search Pictures</a>
+            </li>
+            <li class="nav-item">
+                <a style={{ color: 'grey' }} class="nav-link disabled" href="/my-pictures">My Pictures</a>
+            </li>
+        </> :
+        <>                        
+            <li class="nav-item">
+                <a style={{ color: 'white' }} class="nav-link" href="/logout">Logout</a>
+            </li>
+            <li class="nav-item">
+                <a style={{ color: 'grey' }} class="nav-link disabled" disabled href="/signup">Signup</a>
+            </li>
+            <li class="nav-item">
+                <a style={{ color: 'white' }} class="nav-link" href="/search-pictures">Search Pictures</a>
+            </li>
+            <li class="nav-item">
+                <a style={{ color: 'white' }} class="nav-link" href="/my-pictures">My Pictures</a>
+            </li>
+        </>
+
     return (            
         <nav class="navbar navbar-expand-lg bg-dark">
             <div class="container-fluid">
@@ -17,18 +54,7 @@ const Navbar = () => {
                         <li class="nav-item">
                             <a style={{ color: 'white' }} class="nav-link" href="/about">About</a>
                         </li>
-                        <li class="nav-item">
-                            <a style={{ color: 'white' }} class="nav-link" href="/login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a style={{ color: 'white' }} class="nav-link" href="/signup">Signup</a>
-                        </li>
-                        <li class="nav-item">
-                            <a style={{ color: 'grey' }} class="nav-link disabled" href="/search-pictures">Search Pictures</a>
-                        </li>
-                        <li class="nav-item">
-                            <a style={{ color: 'grey' }} class="nav-link disabled" href="/my-pictures">My Pictures</a>
-                        </li>
+                        { conditionalRenderingOnUserStateSelector }
                     </ul>
                 </div>
             </div>

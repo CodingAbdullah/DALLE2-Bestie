@@ -5,6 +5,7 @@ import SearchPicturesPage from './Components/SearchPicturesPage/SearchPicturesPa
 import MyPicturesPage from './Components/MyPicturesPage/MyPicturesPage';
 import HomePage from './Components/HomePage/HomePage';
 import LoginPage from './Components/LoginPage/LoginPage';
+import LogoutPage from './Components/LogoutPage/LogoutPage';
 import SignupPage from './Components/SignupPage/SignupPage';
 import Footer from './Components/Footer/Footer';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -21,6 +22,7 @@ const App = () => {
           <Route exact path="/about" element={<AboutPage />}></Route>
           <Route exact path="/forgot-password" element={<ForgotPasswordPage />}></Route>
           <Route exact path="/login" element={<LoginPage />}></Route>
+          <Route exact path="/logout" element={<LogoutPage />}></Route>
           <Route exact path="/my-pictures" element={<MyPicturesPage />}></Route>
           <Route exact path="/search-pictures" element={<SearchPicturesPage />}></Route>
           <Route exact path="/signup" element={<SignupPage />}></Route>

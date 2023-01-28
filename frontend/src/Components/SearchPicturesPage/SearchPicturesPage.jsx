@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router';
 const HomePage = () => {
     const [imageRequest, updateImageRequest] = useState('');
     const navigate = useNavigate();
-    const selector = useSelector(state => state.isLoggedIn);
+    const selector = useSelector(state => state.auth.user);
 
     useEffect(() => {
-        if (!selector) {
+        if (selector === null) {
             navigate("/");
         }
-    }, [])
+    }, [selector, navigate])
 
     const formHandler = () => {
 
