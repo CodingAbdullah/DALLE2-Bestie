@@ -1,10 +1,11 @@
 const User = require("../model/User");
+const EmailToken = require("../model/EmailToken");
 const bcryptjs = require("bcryptjs");
 
 exports.PasswordResetController = (req, res) => {
-    const { email, newPassword } = JSON.parse(req.body.body);
-
-    User.find( { email }, (err, docs) => {
+    const { email, password } = JSON.parse(req.body.body);
+    
+    User.find({ email }, (err, docs) => {
         if (err) {
             res.status(400).json({
                 message: err
@@ -18,7 +19,6 @@ exports.PasswordResetController = (req, res) => {
             }
             else {
                 const userInfo = docs[0]; // Get the first and only user belonging to user and update password, storing the new salted/hashed version
-
                 bcryptjs.genSalt(10, (err, salt) => {
                     if (err){
                         res.status(400).json({
@@ -26,18 +26,41 @@ exports.PasswordResetController = (req, res) => {
                         });
                     }
                     else {
-                        bcryptjs.hash(newPassword, salt, (err, hash) => {
+                        bcryptjs.hash(password, salt, (err, hash) => {
                             if (err){
                                 res.status(400).json({
                                     message: "Cannot update password, hashing issue"
                                 });
                             }
                             else {
-                                let newUser = new User({ email: userInfo.email, firstName: userInfo.firstName, lastName: userInfo.lastName, password: hash });
+                                let newUser = new User({ email: userInfo.email, firstName: userInfo.firstName, numberOfPictures: userInfo.numberOfPictures, lastName: userInfo.lastName, password: hash });
                                 newUser.save()
-                                .then(() => {
-                                    res.status(200).json({
-                                        message: 'Password succesfully updated and stored to db'
+                                .then(() => {                                    
+                                    // Once verified, delete token from database and pass control to the succeeding middleware
+                                    EmailToken.deleteOne({ email })
+                                    .then(() => {
+                                        User.deleteOne({ email , password : { $ne : hash }})
+                                        .then(() => {
+                                            res.status(200).json({
+                                                message: 'Password succesfully updated and stored to db',
+                                                verified: true,
+                                                updated: true
+                                            });
+                                        })
+                                        .catch(() => {
+                                            res.status(200).json({
+                                                message: "Password successfully updated, old password not deleted from db",
+                                                verified: true,
+                                                updated: false
+                                            })
+                                        })
+                                    })
+                                    .catch(() => {
+                                        res.status(200).json({
+                                            message: 'Password succesfully updated, stored to db, but old password and token not removed',
+                                            verified: false,
+                                            updated: false
+                                        });
                                     });
                                 })
                                 .catch(err => {

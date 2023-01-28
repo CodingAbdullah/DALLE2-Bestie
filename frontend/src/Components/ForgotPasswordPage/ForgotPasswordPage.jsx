@@ -131,10 +131,14 @@ const ForgotPasswordPage = () => {
                         <label style={{ marginTop: '2rem' }}>Email Address </label>
                         { 
                             isVerified ? 
-                                <input style={{ marginLeft: '25%', width: '50%' }} type="email" disabled className="form-control" /> : 
-                                <input style={{ marginLeft: '25%', width: '50%' }} type="email" className="form-control" onChange={ e => updateEmailAddress(e.target.value)} /> 
+                                <>
+                                    <input style={{ marginLeft: '25%', width: '50%' }} type="email" disabled className="form-control" /> 
+                                </> :
+                                <>
+                                    <input style={{ marginLeft: '25%', width: '50%' }} type="email" onChange={ e => updateEmailAddress(e.target.value) } className="form-control" /> 
+                                    <button style={{ display: 'inline', marginTop: '1rem' }} className='btn btn-primary'>Request Verification Code</button>
+                                </>
                         } 
-                        <button style={{ display: 'inline', marginTop: '1rem' }} className='btn btn-primary'>Request Verification Code</button>
                     </form>
                     <section style={{marginTop: '5rem'}} >
                         { 
@@ -142,11 +146,24 @@ const ForgotPasswordPage = () => {
                                 <form onSubmit={ resetPasswordHandler }>
                                     <h2>Enter Verification Code</h2>
                                     <p>Enter in the verification code and new password to proceed with reset</p>
-                                    <label style={{ marginTop: '2rem' }}>Verification Code</label>
-                                    <input style={{ marginLeft: '25%', width: '50%' }} type="text" className='form-control' required onChange={ e => updateVerificationCode(e.target.value) } />
-                                    <label style={{ marginTop: '2rem' }}>New Password</label>
-                                    <input style={{ marginLeft: '25%', width: '50%' }} type="password" className='form-control' required onChange={ e => updateResetPassword(e.target.value) } />
-                                    <button style={{ marginTop: '1rem' }} type="submit" className="btn btn-success">Reset Password</button>
+                                    {
+                                        setForgotPasswordAlert === 'forgot-password-reset-success' ?
+                                            <>
+                                                <label style={{ marginTop: '2rem' }}>Verification Code</label>
+                                                <input style={{ marginLeft: '25%', width: '50%' }} type="text" className='form-control' disabled />
+                                                <label style={{ marginTop: '2rem' }}>New Password</label>
+                                                <input style={{ marginLeft: '25%', width: '50%' }} type="password" className='form-control' disabled />
+                                                <button style={{ marginTop: '1rem' }} type="submit" disabled className="btn btn-success">Reset Password</button>
+                                            </>
+                                        :
+                                            <> 
+                                                <label style={{ marginTop: '2rem' }}>Verification Code</label>
+                                                <input style={{ marginLeft: '25%', width: '50%' }} type="text" className='form-control' required onChange={ e => updateVerificationCode(e.target.value) } />
+                                                <label style={{ marginTop: '2rem' }}>New Password</label>
+                                                <input style={{ marginLeft: '25%', width: '50%' }} type="password" className='form-control' required onChange={ e => updateResetPassword(e.target.value) } />
+                                                <button style={{ marginTop: '1rem' }} type="submit" className="btn btn-success">Reset Password</button>
+                                            </>
+                                    }
                                 </form>
                             : null
                         }

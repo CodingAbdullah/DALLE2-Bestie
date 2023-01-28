@@ -15,90 +15,58 @@ exports.addEmailToken = (req, res) => {
     const transport = nodemailer.createTransport({
         service: 'gmail',
         auth : {
-            user: process.env.USER,
-            pass: process.env.PASS
+            user: process.env.EMAIL_ADDRESS,
+            pass: process.env.PASSWORD
         }
     });
 
-    // Verify if User already has a token 
-    EmailToken.find({ email }, (err, docs) => {
-        if (err) {
-            res.status(400).json({
-                message: "Cannot query tokens"
+    // Set token expiry to 5 minutes
+    let jwtToken = jwt.sign({ data: token } , process.env.SECRET, { expiresIn: 60 * 5 });
+
+    // Save to database
+    let emailToken = new EmailToken({ email, token: jwtToken });
+
+    emailToken.save()
+    .then(() => {
+        // Send verification code via email 
+        transport.sendMail({
+            from: process.env.EMAIL_ADDRESS,
+            to: email,
+            subject: 'Verification Code for Password reset for OpenAI Image Generator site',
+            html: `<h1>Verification Code</h1>
+                               <p>${message}</p>`
+        })
+        .then(() => {
+            EmailToken.deleteMany({ email, token : { $ne : jwtToken }}) // Delete any previous tokens in db associated with account
+            .then(() => {
+                res.status(201).json({
+                    message: "Token found, updated email token with new one and email sent"
+                });
+            })
+            .catch(err => {
+                res.status(400).json({
+                    message: "Last token could not be deleted " + err
+                });
             });
-        }
-        else {
-            if (docs.length > 0) {
-                EmailToken.deleteOne({ email }); // Delete the record that has the email with its verification token
-
-                // Set new token expiry to 5 minutes
-                let jwtToken = jwt.sign({ data: token } , process.env.SECRET, { expiresIn: 60 * 5 });
-
-                // Save to database
-                let emailToken = new EmailToken({ email, token: jwtToken });   
-                
-                emailToken.save()
-                .then(() => {
-                    // Send verification code via email 
-                    transport.sendMail({
-                        from: process.env.USER,
-                        to: email,
-                        subject: 'Verification Code for Password reset for OpenAI Image Generator site',
-                        html: `<h1>Verification Code</h1>
-                               <p>${message}</p>`
-                    })
-                    .then(() => {
-                        res.status(201).json({
-                            message: "Token found, updated email token with new one"
-                        });
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        res.status(400).json({
-                            message: "Verification code could not be sent " + err
-                        });
-                    });
-                })
-                .catch((err) => {
-                    res.status(400).json({
-                        message: 'Cannot save token to database ' + err
-                    });
+        })
+        .catch(err => {
+            EmailToken.deleteOne({ email, token : { $eq : jwtToken }}) // If email containing token could not be sent, delete the token
+            .then(() => {
+                // Delete the record that has the email with its verification token
+                res.status(400).json({
+                    message: "Verification code could not be sent " + err
                 });
-            }
-            else {
-                // Set token expiry to 5 minutes
-                let jwtToken = jwt.sign({ data: token } , process.env.SECRET, { expiresIn: 60 * 5 });
-
-                // Save to database
-                let emailToken = new EmailToken({ email, token: jwtToken });
-
-                emailToken.save()
-                .then(() => {
-                    // Send verification code via email 
-                    transport.sendMail({
-                        from: process.env.USER,
-                        to: email,
-                        subject: 'Verification Code for Password reset for OpenAI Image Generator site',
-                        html: `<h1>Verification Code</h1>
-                               <p>${message}</p>`
-                    })
-                    .then(() => {
-                        res.status(201).json({
-                            message: "Token added"
-                        });
-                    })
-                    .catch(err => {
-                        res.status(400).json({
-                            message: "Verification code could not be sent " + err
-                        });
-                    });
-                })
-                .catch((err) => {
-                    res.status(400).json({
-                        message: "Cannot save token to db: " + err
-                    });
+            })
+            .catch((err2) => {
+                res.status(400).json({
+                    message: err + " .Error 2: " + err2
                 });
-            }
-        }
+            })
+        });
+    })
+    .catch((err) => {
+        res.status(400).json({
+            message: "Cannot save token to db: " + err
+        });
     });
 }

@@ -14,12 +14,6 @@ exports.verifyUserMiddleware = (req, res, next) => {
             // Pass handle to the succeeding controller
             if (docs.length > 0 && email.split("@")[1].trim() === 'gmail.com') {
                 next();
-                /*
-                    res.status(200).json({
-                        message: "User exists",
-                        doesExist: true
-                    });
-                */
             }
             else if (docs.length > 0 ) {
                 res.status(200).json({

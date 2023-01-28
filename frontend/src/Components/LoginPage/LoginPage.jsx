@@ -30,18 +30,18 @@ const LoginPage = () => {
         // Dispatch login action using redux
         dispatch(login({ email, password }));
 
-        if (errorSelector !== null) {
-            updateLoginAlert('login-external-error');
-        }
-        else if (userSelector === null && successSelector && tokenSelector === null){
+        if (userSelector === null && successSelector && tokenSelector === null){
             updateLoginAlert('login-user-password-incorrect');
+        }
+        else if (errorSelector !== null) {
+            updateLoginAlert('login-external-error');
         }
     }
 
     if (loadingSelector) {
         return <div>Loading...</div>
     }
-    else if (successSelector && userSelector !== null){
+    else if (successSelector && userSelector !== null && tokenSelector !== null){
         navigate("/");
     }
     else {
