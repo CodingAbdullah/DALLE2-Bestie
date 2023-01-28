@@ -25,7 +25,7 @@ exports.loginController = (req, res) => {
                 });
             }
             else {
-                bcrypt.compare(password, result[0].password, (err, result) => {
+                bcrypt.compare(password, result[0].password, (err, verified) => {
                     if (err) {
                         res.status(400).json({
                             message: "Unable to trace password",
@@ -34,7 +34,7 @@ exports.loginController = (req, res) => {
                         });
                     }
                     else {
-                        if (!result) {
+                        if (!verified) {
                             res.status(200).json({
                                 message: "Invalid password",
                                 userExist: true,

@@ -17,7 +17,7 @@ const LoginPage = () => {
         e.preventDefault();
 
         // Redux implementation
-        dispatch(login(email, password));
+        dispatch(login({ email, password }));
         
         /*
         const options = {
