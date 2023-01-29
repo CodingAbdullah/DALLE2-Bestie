@@ -7,7 +7,6 @@ import axios from 'axios';
 
 const MyPicturesPage = () => {
     const userSelector = useSelector(state => state.auth.user);
-
     const dispatch = useDispatch(); 
     const navigate = useNavigate();   
     
@@ -23,7 +22,7 @@ const MyPicturesPage = () => {
         else {
             let options = {
                 method: 'POST',
-                body: JSON.stringify({ user: userSelector.user.email }),
+                body: JSON.stringify({ email: userSelector.user.email }),
                 headers : {
                     'content-type' : 'application/json',
                     'Authorization' : 'Bearer ' + userSelector.token
@@ -31,7 +30,6 @@ const MyPicturesPage = () => {
         }
             axios.post("http://localhost:5000/fetch-pictures", options)
             .then(response => {
-                console.log(response.data);
                 updateUserPictures((prevState) => {
                     return {
                         ...prevState,
@@ -52,13 +50,13 @@ const MyPicturesPage = () => {
     else {
         return (
             <div className='my-pictures-page'>
-                <h1 style={{ marginTop: '2rem' }}>Your Picture Searches</h1>
-                <div class='table-container container p-5'>
+                <h1 style={{ marginTop: '2rem' }}>Your Saved Picture Searches</h1>
+                <div class='table-container container'>
                     <div class="row">
                         {
                             userPictures.information.docs.map(pic => {
                                 return (
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <div class="col-sm-12 col-md-6 col-lg-3 gx-1 gy-1 p-3">
                                         <PictureItem picture={pic} />
                                     </div>
                                 )
@@ -66,6 +64,7 @@ const MyPicturesPage = () => {
                         }
                     </div>
                 </div>
+                <button style={{ marginTop: '2rem' }} class="btn btn-primary" onClick={ () => navigate("/") }>Go Home</button>
             </div>
         )
     }

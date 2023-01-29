@@ -5,6 +5,7 @@ const UserPicture = require("../model/UserPicture");
 exports.fetchMyPictures = (req, res) => {
     const { email } = JSON.parse(req.body.body);
 
+    // Fetch all the pictures requested by the user in the past and send as response
     UserPicture.find( { email }, (err, docs) => {
         if (err) {
             res.status(400).json({
@@ -24,6 +25,7 @@ exports.insertPicture = (req, res) => {
     const { email, search, size, url } = JSON.parse(req.body.body);
     let newUserPicture = new UserPicture({ email, search, size, url });
 
+    // Insert picture into database if user requests to
     newUserPicture.save()
     .then(() => {
         res.status(201).json({
