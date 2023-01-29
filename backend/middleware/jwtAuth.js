@@ -3,18 +3,25 @@ require('dotenv').config({ path: '../../.env' });
 const jwt = require("jsonwebtoken");
 
 exports.verifyJWTMiddleware = (req, res, next) => {
-    const { token } = req.headers.Authorization.split(" ")[1]; // "Authorization <token>"
-
-    jwt.verify(token, process.env.SECRET, (err, result) => {
-        if (err) {
-            res.status(401).json({
-                message: "Unauthorized. Invalid token"
-            });
-        }
-        else {
-            // If verified, send request over to the next piece of middleware, or in this case, controller
-            req.body.result = result;
-            next();
-        }
-    });
+    if (req.body.headers.Authorization === undefined || req.body.headers.Authorization === null) {
+        res.status(401).json({
+            message: "UnAuthorized route",
+            token: false
+        });
+    }
+    else {
+        const token = req.body.headers.Authorization.split(" ")[1]; // "Authorization: "Bearer <token>"
+        jwt.verify(token, process.env.SECRET, (err, result) => {
+            if (err) {
+                res.status(401).json({
+                    message: "Unauthorized. Invalid token",
+                    token: true
+                });
+            }
+            else {
+                // If verified, send request over to the next piece of middleware, or in this case, controller
+                next();
+            }
+        });
+    }
 }

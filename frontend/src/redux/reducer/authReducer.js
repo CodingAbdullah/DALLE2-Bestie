@@ -39,7 +39,6 @@ let authSlice = createSlice({
             state.isLoading = false;
             state.error = false;
             state.isSuccess = false;
-            state.token = null;
         }
     },
     extraReducers : (builder) => {
