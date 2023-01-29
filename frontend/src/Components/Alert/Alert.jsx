@@ -59,6 +59,14 @@ const Alert = (props) => {
             msg = "Password to this associated email has been successfully updated!";
             alertType = 'success';
             break;
+        case "picture-save-success":
+            msg = "Picture saved to database!";
+            alertType = 'success';
+            break;
+        case "picture-save-alert":
+            msg = "Picture was NOT saved to database!";
+            alertType = 'danger';
+            break;
         default:
             break;
     }

@@ -21,8 +21,8 @@ exports.fetchMyPictures = (req, res) => {
 }
 
 exports.insertPicture = (req, res) => {
-    const { email, search } = JSON.parse(req.body.body);
-    let newUserPicture = new UserPicture({ email: email, search: search});
+    const { email, search, size, url } = JSON.parse(req.body.body);
+    let newUserPicture = new UserPicture({ email, search, size, url });
 
     newUserPicture.save()
     .then(() => {
@@ -31,10 +31,10 @@ exports.insertPicture = (req, res) => {
         });
     })
     .catch(() => {
-        res.status(400).json({
+        res.status(200).json({
             message: "Picture could not be saved to database"
         });
-    })
+    });
 }
 
 exports.createAPicture = (req, res) => {
