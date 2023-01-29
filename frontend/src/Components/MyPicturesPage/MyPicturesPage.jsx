@@ -29,21 +29,20 @@ const MyPicturesPage = () => {
                     'Authorization' : 'Bearer ' + userSelector.token
                 }
         }
-
-        axios.post("http://localhost:5000/fetch-pictures", options)
-        .then(response => {
-            console.log(response.data);
-            updateUserPictures((prevState) => {
-                return {
-                    ...prevState,
-                    information: response.data
-                }
+            axios.post("http://localhost:5000/fetch-pictures", options)
+            .then(response => {
+                console.log(response.data);
+                updateUserPictures((prevState) => {
+                    return {
+                        ...prevState,
+                        information: response.data
+                    }
+                });
+            })
+            .catch(() => {
+                dispatch(logout()); // Logout the user immediately if token is invalid or nonexistant and redirect
+                navigate("/");
             });
-        })
-        .catch(() => {
-            dispatch(logout()); // Logout the user immediately if token is invalid or nonexistant and redirect
-            navigate("/");
-        });
         }
     }, []);
 

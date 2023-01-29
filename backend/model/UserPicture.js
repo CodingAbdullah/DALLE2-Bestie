@@ -10,6 +10,14 @@ const UserPicture = new mongoose.Schema(
         search: {
             type: String,
             required: true
+        },
+        size : {
+            type: String,
+            required: true
+        },
+        url : {
+            type: String,
+            required: true
         }
     }
     ,

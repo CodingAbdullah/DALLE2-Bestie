@@ -51,7 +51,6 @@ exports.createAPicture = (req, res) => {
         size: size === 'small' ? '256x256' : ( size === 'medium' ? '512x512' : '1024x1024' ) // small, medium, or large
     })
     .then(response => {
-        console.log(response.data);
         res.status(200).json({
             message: 'Success',
             url : response.data.data
