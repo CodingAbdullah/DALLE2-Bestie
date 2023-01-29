@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Alert from '../Alert/Alert';
 import axios from 'axios';
 import validator from 'validator';
+import { styles } from '../../css/ForgotPasswordPageCSS';
 
 const ForgotPasswordPage = () => {
     const [email, updateEmailAddress] = useState('');
@@ -121,26 +122,26 @@ const ForgotPasswordPage = () => {
 
     return (
         <div className='forgot-password-page'>
-            <div style={{ paddingTop: '2.5rem', paddingBottom: '2.5rem', backgroundColor: '#EAFCFC' }} className="jumbotron">
+            <div style={ styles.jumbotron } className="jumbotron">
                 <div className="container">
                     { setForgotPasswordAlert === '' ? null : <Alert type={ setForgotPasswordAlert } /> }
                     <form onSubmit={ forgotPasswordHandler }>
                         <h2>Password Reset</h2>
                         <p>Enter in the email address below for password reset</p>
                         <p>Please note: Only <b>GMail</b> addresses are supported at the moment</p>
-                        <label style={{ marginTop: '2rem' }}>Email Address </label>
+                        <label style={styles['email-address-label']}>Email Address </label>
                         { 
                             isVerified ? 
                                 <>
-                                    <input style={{ marginLeft: '25%', width: '50%' }} type="email" disabled className="form-control" /> 
+                                    <input style={styles['email-input']} type="email" disabled className="form-control" /> 
                                 </> :
                                 <>
-                                    <input style={{ marginLeft: '25%', width: '50%' }} type="email" onChange={ e => updateEmailAddress(e.target.value) } className="form-control" /> 
-                                    <button style={{ display: 'inline', marginTop: '1rem' }} className='btn btn-primary'>Request Verification Code</button>
+                                    <input style={styles['email-input']} type="email" onChange={ e => updateEmailAddress(e.target.value) } className="form-control" /> 
+                                    <button style={styles['email-verification-button']} className='btn btn-primary'>Request Verification Code</button>
                                 </>
                         } 
                     </form>
-                    <section style={{marginTop: '5rem'}} >
+                    <section style={styles['verify-token-section']} >
                         { 
                             isVerified && isCodeCreated ? 
                                 <form onSubmit={ resetPasswordHandler }>
@@ -149,19 +150,19 @@ const ForgotPasswordPage = () => {
                                     {
                                         setForgotPasswordAlert === 'forgot-password-reset-success' ?
                                             <>
-                                                <label style={{ marginTop: '2rem' }}>Verification Code</label>
-                                                <input style={{ marginLeft: '25%', width: '50%' }} type="text" className='form-control' disabled />
-                                                <label style={{ marginTop: '2rem' }}>New Password</label>
-                                                <input style={{ marginLeft: '25%', width: '50%' }} type="password" className='form-control' disabled />
-                                                <button style={{ marginTop: '1rem' }} type="submit" disabled className="btn btn-success">Reset Password</button>
+                                                <label style={styles['verification-code-label']}>Verification Code</label>
+                                                <input style={styles['verification-code-input']} type="text" className='form-control' disabled />
+                                                <label style={styles['new-password-label']}>New Password</label>
+                                                <input style={styles['new-password-input']} type="password" className='form-control' disabled />
+                                                <button style={styles['new-password-submit-button']} type="submit" disabled className="btn btn-success">Reset Password</button>
                                             </>
                                         :
                                             <> 
-                                                <label style={{ marginTop: '2rem' }}>Verification Code</label>
-                                                <input style={{ marginLeft: '25%', width: '50%' }} type="text" className='form-control' required onChange={ e => updateVerificationCode(e.target.value) } />
-                                                <label style={{ marginTop: '2rem' }}>New Password</label>
-                                                <input style={{ marginLeft: '25%', width: '50%' }} type="password" className='form-control' required onChange={ e => updateResetPassword(e.target.value) } />
-                                                <button style={{ marginTop: '1rem' }} type="submit" className="btn btn-success">Reset Password</button>
+                                                <label style={styles['verification-code-label']}>Verification Code</label>
+                                                <input style={styles['verification-code-input']} type="text" className='form-control' required onChange={ e => updateVerificationCode(e.target.value) } />
+                                                <label style={styles['new-password-label']}>New Password</label>
+                                                <input style={styles['new-password-input']} type="password" className='form-control' required onChange={ e => updateResetPassword(e.target.value) } />
+                                                <button style={styles['new-password-submit-button']} type="submit" className="btn btn-success">Reset Password</button>
                                             </>
                                     }
                                 </form>

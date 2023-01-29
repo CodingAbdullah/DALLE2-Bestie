@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { styles } from '../../css/LogoutPageCSS';
 import { logout } from '../../redux/reducer/authReducer';
 
 const LogoutPage = () => {
@@ -20,11 +21,11 @@ const LogoutPage = () => {
 
     return (
         <div className='logout-page'>
-            <div style={{ paddingTop: '2.5rem', paddingBottom: '2.5rem', backgroundColor: '#EAFCFC' }} className="jumbotron">
+            <div style={styles['logout-page-jumbotron']} className="jumbotron">
                 <div className="container">
                     <h2>Logged Out</h2>
                     <p>Hope you enjoyed your stay and have a productive rest of your day!</p>
-                    <button style={{ marginTop: '2rem' }} class="btn btn-success" onClick={ () => navigate("/") }>Home</button>
+                    <button style={styles['home-button']} class="btn btn-success" onClick={ () => navigate("/") }>Home</button>
                 </div>
             </div>
         </div>

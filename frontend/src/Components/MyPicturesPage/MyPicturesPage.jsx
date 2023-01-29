@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import { logout } from '../../redux/reducer/authReducer';
 import PictureItem from '../PictureItem/PictureItem';
 import axios from 'axios';
+import { styles } from '../../css/MyPicturesPageCSS';
 
 const MyPicturesPage = () => {
     const userSelector = useSelector(state => state.auth.user);
@@ -50,7 +51,7 @@ const MyPicturesPage = () => {
     else {
         return (
             <div className='my-pictures-page'>
-                <h1 style={{ marginTop: '2rem' }}>Your Saved Picture Searches</h1>
+                <h1 style={styles['h1-searches-label']}>Your Saved Picture Searches</h1>
                 <div class='table-container container'>
                     <div class="row">
                         {
@@ -64,7 +65,7 @@ const MyPicturesPage = () => {
                         }
                     </div>
                 </div>
-                <button style={{ marginTop: '2rem' }} class="btn btn-primary" onClick={ () => navigate("/") }>Go Home</button>
+                <button style={styles['home-button']} class="btn btn-primary" onClick={ () => navigate("/") }>Go Home</button>
             </div>
         )
     }

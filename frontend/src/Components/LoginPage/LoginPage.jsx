@@ -3,6 +3,7 @@ import Alert from '../Alert/Alert';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/reducer/authReducer';
+import { styles } from '../../css/LoginPageCSS';
 
 const LoginPage = () => {
     const [email, updateEmailAddress] = useState('');
@@ -47,18 +48,18 @@ const LoginPage = () => {
     else {
         return (
             <div className='login-page'>
-                <div style={{ paddingTop: '2.5rem', paddingBottom: '2.5rem', backgroundColor: '#EAFCFC' }} className="jumbotron">
+                <div style={styles['login-page-jumbotron']} className="jumbotron">
                     <div className="container">
                         { setLoginAlert === '' ? null : <Alert type={ setLoginAlert } />  }
                         <form onSubmit={ loginHandler }>
                             <h2>Login</h2>
                             <p>Enter in credentials to proceed</p>
-                            <label style={{ marginTop: '2rem' }}>Email Address </label>
-                            <input style={{ marginLeft: '25%', width: '50%' }} type="email" className="form-control" onChange={e => updateEmailAddress(e.target.value)} />
-                            <label style={{ marginTop: '1.5rem' }}>Password </label>
-                            <input style={{ marginLeft: '25%', width: '50%' }} type="password" className="form-control" onChange={e => updatePassword(e.target.value)} />
+                            <label style={styles['email-address-label']}>Email Address </label>
+                            <input style={styles['email-address-input']} type="email" className="form-control" onChange={e => updateEmailAddress(e.target.value)} />
+                            <label style={styles['password-label']}>Password </label>
+                            <input style={styles['password-input']} type="password" className="form-control" onChange={e => updatePassword(e.target.value)} />
                             <a href="/forgot-password">Forgot Password</a><br />
-                            <button style={{ marginTop: '2rem', display: 'inline' }} className='btn btn-primary'>Login</button>
+                            <button style={styles['login-button']} className='btn btn-primary'>Login</button>
                         </form>
                     </div>
                 </div>
