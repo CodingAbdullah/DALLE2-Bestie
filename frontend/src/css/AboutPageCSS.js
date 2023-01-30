@@ -1,15 +1,21 @@
 // CSS for About page
 
 export const styles = {
-    jumbotron : {
-        'padding-top': '2.5rem',
-        'padding-bottom': '2.5rem',
-        'background-color': '#EAFCFC'
+    'jumbotron' : {
+        'paddingTop': '2.5rem',
+        'paddingBottom': '2.5rem'
     },
-    about_paragraph : {
-        'margin-top' : '2rem'
+    'about_heading': {
+        'colour': 'yellow'
     },
-    developer_link : {
-        color: 'black'
+    'about_paragraph' : {
+        'marginTop' : '2rem',
+        'fontStyle' : 'italic'
+    },
+    'developer_link' : {
+        'color': 'yellow'
+    },
+    'developer_paragraph' : {
+        'fontStyle' : 'italic'
     }
 }

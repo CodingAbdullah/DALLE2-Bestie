@@ -22,6 +22,6 @@ export const styles = {
     },
     "button-login-search" : {
         "marginTop" : '1rem',
-        "marginBottom" : '2rem'
+        "marginBottom" : '3rem'
     }
 }
