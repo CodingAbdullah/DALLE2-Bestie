@@ -1,22 +1,27 @@
 // CSS for Signup Page
 export const styles = {
     'signup-page-jumbotron' : {
-        'padding-top': '2.5rem', 
-        'padding-bottom': '2.5rem', 
-        'background-color': '#EAFCFC'
+        'paddingTop': '2.5rem', 
+        'paddingBottom': '2.5rem', 
+    },
+    'signup' : {
+        'color' : 'yellow'
+    },
+    'signup-description' : {
+        'fontStyle' : 'italic'
     },
     'first-signup-label' : {
-        'margin-top' : '2rem'
+        'marginTop' : '2rem'
     },
     'signup-label' : {
-        'margin-top' : '1rem'
+        'marginTop' : '1rem'
     },
     'signup-input' : {
-        'margin-left' : '25%',
+        'marginLeft' : '25%',
         'width' : '50%'
     },
     'signup-button' : {
         'display' : 'inline',
-        'margin-top' : '1rem'
+        'marginTop' : '3rem'
     }
 }

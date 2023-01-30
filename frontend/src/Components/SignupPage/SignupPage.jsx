@@ -51,22 +51,29 @@ const SignupPage = () => {
 
     return (
         <div className='signup-page'>
-            <div style={styles['signup-page-jumbotron']} className="jumbotron">
-                <div className="container">
-                    { setSignupAlert === '' ? null : <Alert type={ setSignupAlert } /> }
-                    <form onSubmit={ signupHandler }>
-                        <h2>Signup</h2>
-                        <p>Enter in signup details to proceed</p>
-                        <label style={styles['first-signup-label']}>First Name </label>
-                        <input style={styles['signup-input']}type="text" className="form-control" onChange={e => updateFirstName(e.target.value)} />
-                        <label style={styles['signup-label']}>Last Name </label>
-                        <input style={styles['signup-input']} type="text" className="form-control" onChange={e => updateLastName(e.target.value)} />
-                        <label style={styles['signup-label']}>Email Address </label>
-                        <input style={styles['signup-input']} type="email" className="form-control" onChange={e => updateEmailAddress(e.target.value)} />
-                        <label style={styles['signup-label']}>Password </label>
-                        <input style={styles['signup-input']} type="password" className="form-control" onChange={e => updatePassword(e.target.value)} />
-                        <button style={styles['signup-button']} type="submit" class='btn btn-primary'>Signup</button>
-                    </form>
+            <div style={styles['signup-page-jumbotron']} className="container">
+                { setSignupAlert === '' ? null : <Alert type={ setSignupAlert } /> }
+                <div className="row">
+                    <div className="bg-dark col-sm-12 col-md-12 col-lg-6">
+                        <div className='d-flex-col text-white px-3 py-5'>
+                            <form onSubmit={ signupHandler }>
+                                <h2 style={styles['signup']}>Signup</h2>
+                                <p style={styles['signup-description']}>Enter in signup details to proceed</p>
+                                <label style={styles['first-signup-label']}>First Name </label>
+                                <input style={styles['signup-input']}type="text" className="form-control" onChange={e => updateFirstName(e.target.value)} />
+                                <label style={styles['signup-label']}>Last Name </label>
+                                <input style={styles['signup-input']} type="text" className="form-control" onChange={e => updateLastName(e.target.value)} />
+                                <label style={styles['signup-label']}>Email Address </label>
+                                <input style={styles['signup-input']} type="email" className="form-control" onChange={e => updateEmailAddress(e.target.value)} />
+                                <label style={styles['signup-label']}>Password </label>
+                                <input style={styles['signup-input']} type="password" className="form-control" onChange={e => updatePassword(e.target.value)} />
+                                <button style={styles['signup-button']} type="submit" class='btn btn-primary'>Signup</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div className="bg-dark col-sm-12 col-md-12 text-white col-lg-6 py-5">
+                        <img className="pt-5" src={require("../../assets/images/signup.png")} alt="No Text" height="400" />
+                    </div>
                 </div>
             </div>
         </div>

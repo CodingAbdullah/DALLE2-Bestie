@@ -48,8 +48,8 @@ const LoginPage = () => {
     else {
         return (
             <div className='login-page'>
-                { setLoginAlert === '' ? null : <Alert type={ setLoginAlert } />  }
                 <div style={styles.jumbotron} class="container">
+                { setLoginAlert === '' ? null : <Alert type={ setLoginAlert } />  }
                     <div className="row">
                         <div className="bg-dark col-sm-12 col-md-12 col-lg-6">
                             <div className='d-flex-col text-white px-3 py-5'>

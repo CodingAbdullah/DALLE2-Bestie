@@ -31,7 +31,7 @@ const HomePage = () => {
                                         </>
                                         :
                                         <>
-                                            <button style={styles['button-login-search'] }className="btn btn-success" onClick={ () => navigate("/search-pictures") }>Search</button>
+                                            <button style={styles['button-login-search'] }className="btn btn-primary" onClick={ () => navigate("/search-pictures") }>Search</button>
                                         </>
                                 }
                             </div>                    
