@@ -122,53 +122,59 @@ const ForgotPasswordPage = () => {
 
     return (
         <div className='forgot-password-page'>
-            <div style={ styles.jumbotron } className="jumbotron">
-                <div className="container">
-                    { setForgotPasswordAlert === '' ? null : <Alert type={ setForgotPasswordAlert } /> }
-                    <form onSubmit={ forgotPasswordHandler }>
-                        <h2>Password Reset</h2>
-                        <p>Enter in the email address below for password reset</p>
-                        <p>Please note: Only <b>GMail</b> addresses are supported at the moment</p>
-                        <label style={styles['email-address-label']}>Email Address </label>
-                        { 
-                            isVerified ? 
-                                <>
-                                    <input style={styles['email-input']} type="email" disabled className="form-control" /> 
-                                </> :
-                                <>
-                                    <input style={styles['email-input']} type="email" onChange={ e => updateEmailAddress(e.target.value) } className="form-control" /> 
-                                    <button style={styles['email-verification-button']} className='btn btn-primary'>Request Verification Code</button>
-                                </>
-                        } 
-                    </form>
-                    <section style={styles['verify-token-section']} >
-                        { 
-                            isVerified && isCodeCreated ? 
-                                <form onSubmit={ resetPasswordHandler }>
-                                    <h2>Enter Verification Code</h2>
-                                    <p>Enter in the verification code and new password to proceed with reset</p>
-                                    {
-                                        setForgotPasswordAlert === 'forgot-password-reset-success' ?
+            <div style={ styles.jumbotron } className="container">
+                { setForgotPasswordAlert === '' ? null : <Alert type={ setForgotPasswordAlert } /> }
+                <div className="row p-6">
+                    <div className="bg-dark col-sm-12 col-md-12 col-lg-6">
+                        <div className='d-flex-col text-white px-3 py-5'>
+                        <form onSubmit={ forgotPasswordHandler }>
+                                    <h2 style={ styles.reset_heading }>Password Reset</h2>
+                                    <p style={ styles.reset_paragraph }>Enter in the email address below for password reset. <br/> Please note: Only <b>GMail</b> addresses are supported at the moment</p>
+                                    <label style={styles['email-address-label']}>Email Address </label>
+                                    { 
+                                        isVerified ? 
                                             <>
-                                                <label style={styles['verification-code-label']}>Verification Code</label>
-                                                <input style={styles['verification-code-input']} type="text" className='form-control' disabled />
-                                                <label style={styles['new-password-label']}>New Password</label>
-                                                <input style={styles['new-password-input']} type="password" className='form-control' disabled />
-                                                <button style={styles['new-password-submit-button']} type="submit" disabled className="btn btn-success">Reset Password</button>
+                                                <input style={styles['email-input']} type="email" disabled className="form-control" /> 
+                                            </> :
+                                            <>
+                                                <input style={styles['email-input']} type="email" onChange={ e => updateEmailAddress(e.target.value) } className="form-control" /> 
+                                                <button style={styles['email-verification-button']} className='btn btn-primary'>Request Verification Code</button>
                                             </>
-                                        :
-                                            <> 
-                                                <label style={styles['verification-code-label']}>Verification Code</label>
-                                                <input style={styles['verification-code-input']} type="text" className='form-control' required onChange={ e => updateVerificationCode(e.target.value) } />
-                                                <label style={styles['new-password-label']}>New Password</label>
-                                                <input style={styles['new-password-input']} type="password" className='form-control' required onChange={ e => updateResetPassword(e.target.value) } />
-                                                <button style={styles['new-password-submit-button']} type="submit" className="btn btn-success">Reset Password</button>
-                                            </>
-                                    }
+                                    } 
                                 </form>
-                            : null
-                        }
-                    </section>
+                                <section style={styles['verify-token-section']} >
+                                    { 
+                                        isVerified && isCodeCreated ? 
+                                            <form onSubmit={ resetPasswordHandler }>
+                                                <h2 style={ styles.reset_heading }>Enter Verification Code</h2>
+                                                <p style={ styles.reset_paragraph }>Enter in the verification code and new password to proceed with reset</p>
+                                                {
+                                                    setForgotPasswordAlert === 'forgot-password-reset-success' ?
+                                                        <>
+                                                            <label style={styles['verification-code-label']}>Verification Code</label>
+                                                            <input style={styles['verification-code-input']} type="text" className='form-control' disabled />
+                                                            <label style={styles['new-password-label']}>New Password</label>
+                                                            <input style={styles['new-password-input']} type="password" className='form-control' disabled />
+                                                            <button style={styles['new-password-submit-button']} type="submit" disabled className="btn btn-success">Reset Password</button>
+                                                        </>
+                                                    :
+                                                        <> 
+                                                            <label style={styles['verification-code-label']}>Verification Code</label>
+                                                            <input style={styles['verification-code-input']} type="text" className='form-control' required onChange={ e => updateVerificationCode(e.target.value) } />
+                                                            <label style={styles['new-password-label']}>New Password</label>
+                                                            <input style={styles['new-password-input']} type="password" className='form-control' required onChange={ e => updateResetPassword(e.target.value) } />
+                                                            <button style={styles['new-password-submit-button']} type="submit" className="btn btn-success">Reset Password</button>
+                                                        </>
+                                                }
+                                            </form>
+                                        : null
+                                    }
+                                </section>
+                        </div>
+                    </div>
+                    <div className="bg-dark col-sm-12 col-md-12 text-white col-lg-6 py-5">
+                        <img className="mr-5" src={require("../../assets/images/fp.png")} alt="No Text" height="350" />
+                    </div>
                 </div>
             </div>
         </div>
