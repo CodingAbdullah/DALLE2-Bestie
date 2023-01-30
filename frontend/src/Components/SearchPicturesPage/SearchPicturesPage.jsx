@@ -106,9 +106,9 @@ const SearchPicturesPage = () => {
                                             <br />
                                             {
                                                 saveAlert === '' ? 
-                                                    <button style={styles['save-profile-button']} class="btn btn-success" onClick={() => saveHandler()}>Save Picture to Profile</button>
+                                                    <button style={styles['save-profile-button']} className="btn btn-success" onClick={() => saveHandler()}>Save Picture to Profile</button>
                                                 :
-                                                    <button style={styles['save-profile-button']} class="btn btn-success" disabled>Save Picture to Profile</button>
+                                                    <button style={styles['save-profile-button']} className="btn btn-success" disabled>Save Picture to Profile</button>
                                             }
                                         </>         
                                 }

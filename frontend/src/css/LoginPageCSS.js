@@ -19,7 +19,8 @@ export const styles = {
     },
     "password-input" : {
         "marginLeft" : '25%',
-        "width" : '50%'
+        "width" : '50%',
+        'marginBottom' : '1rem'
     },
     "login_heading" : {
         'color' : 'yellow'
@@ -27,8 +28,5 @@ export const styles = {
     "login-button" : {
         'marginTop' : '2rem',
         'display' : 'inline'
-    },
-    "password_link" : {
-        'marginTop': "1rem"
     }
 }

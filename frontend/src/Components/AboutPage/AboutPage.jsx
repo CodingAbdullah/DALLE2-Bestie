@@ -5,7 +5,7 @@ const AboutPage = () => {
 
     return (
         <div className='about-page'>
-            <div style={styles.jumbotron} class="container">
+            <div style={styles.jumbotron} className="container">
                 <div className="row">
                     <div className="bg-dark col-sm-12 col-md-12 col-lg-6">
                         <div className='d-flex-col text-white px-3 py-5'>

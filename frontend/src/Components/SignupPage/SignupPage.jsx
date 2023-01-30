@@ -67,7 +67,7 @@ const SignupPage = () => {
                                 <input style={styles['signup-input']} type="email" className="form-control" onChange={e => updateEmailAddress(e.target.value)} />
                                 <label style={styles['signup-label']}>Password </label>
                                 <input style={styles['signup-input']} type="password" className="form-control" onChange={e => updatePassword(e.target.value)} />
-                                <button style={styles['signup-button']} type="submit" class='btn btn-primary'>Signup</button>
+                                <button style={styles['signup-button']} type="submit" className='btn btn-primary'>Signup</button>
                             </form>
                         </div>
                     </div>

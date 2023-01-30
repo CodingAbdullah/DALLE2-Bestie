@@ -2,9 +2,16 @@
 
 export const styles = {
     "h1-searches-label" : {
-        'margin-top' : '2rem'
+        'marginTop' : '2rem',
+        'paddingTop' : '2rem',
+        'color' : 'yellow'
     },
     "home-button" : {
-        'margin-top' : '2rem'
+        'marginTop' : '2rem',
+        'marginBottom' : '2rem'
+    },
+    'image_list_paragraph' : {
+        'fontStyle' : 'italic',
+        'color' : 'white'
     }
 }

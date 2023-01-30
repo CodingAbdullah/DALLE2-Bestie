@@ -73,7 +73,7 @@ const Alert = (props) => {
 
     return (
         <div className='alert'>
-            <div class={`alert alert-${alertType}`} role="alert">
+            <div className={`alert alert-${alertType}`} role="alert">
                 { msg }
             </div>
         </div>

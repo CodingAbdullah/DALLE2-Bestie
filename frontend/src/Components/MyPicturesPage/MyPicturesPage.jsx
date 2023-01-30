@@ -51,21 +51,22 @@ const MyPicturesPage = () => {
     else {
         return (
             <div className='my-pictures-page'>
-                <h1 style={styles['h1-searches-label']}>Your Saved Picture Searches</h1>
-                <div class='table-container container'>
-                    <div class="row">
+                <div className='bg-dark table-container container'>
+                    <h1 style={ styles['h1-searches-label'] }>Your Saved Picture Searches</h1>
+                    <p style={ styles.image_list_paragraph }>View your saved pictures</p>
+                    <div className="row">
                         {
                             userPictures.information.docs.map(pic => {
                                 return (
-                                    <div class="col-sm-12 col-md-6 col-lg-3 gx-1 gy-1 p-3">
+                                    <div className="col-sm-12 col-md-6 col-lg-3 gx-1.5 gy-1.5 p-3">
                                         <PictureItem picture={pic} />
                                     </div>
                                 )
                             })
                         }
                     </div>
+                    <button style={styles['home-button']} className="btn btn-primary" onClick={ () => navigate("/") }>Go Home</button>
                 </div>
-                <button style={styles['home-button']} class="btn btn-primary" onClick={ () => navigate("/") }>Go Home</button>
             </div>
         )
     }
