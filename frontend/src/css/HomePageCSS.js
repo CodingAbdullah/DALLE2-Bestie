@@ -4,7 +4,6 @@ export const styles = {
     "home-page-jumbotron" : {
         'paddingTop': '2.5rem', 
         'paddingBottom': '2.5rem', 
-        'backgroundColor': '#EAFCFC' 
     },
     "container" : {
         'marginTop' : '2rem'
@@ -14,7 +13,7 @@ export const styles = {
         'fontStyle' : 'italic'
     },
     "paragraph-link" : {
-        'color' : 'purple'
+        'color' : 'blue'
     },
     "AI-ART-Title" : {
         "marginTop" : '3rem',

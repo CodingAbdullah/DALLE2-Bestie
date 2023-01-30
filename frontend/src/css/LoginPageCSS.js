@@ -1,26 +1,34 @@
 // CSS for Login Page
 export const styles = {
-    "login-page-jumbotron" : {
-        'padding-top': '2.5rem', 
-        'padding-bottom': '2.5rem', 
-        'background-color': '#EAFCFC'  
+    "jumbotron" : {
+        'paddingTop': '2.5rem', 
+        'paddingBottom': '2.5rem', 
     },
     "email-address-label" : {
-        'margin-top' : '2rem'
+        'marginTop' : '2rem'
     },
     "email-address-input" : {
-        "margin-left" : '25%',
+        "marginLeft" : '25%',
         'width' : '50%'
     },
+    "label" : {
+        "fontStyle" : 'italic'
+    },
     "password-label" : {
-        'margin-top' : '1.5rem'
+        'marginTop' : '1.5rem'
     },
     "password-input" : {
-        "margin-left" : '25%',
+        "marginLeft" : '25%',
         "width" : '50%'
     },
+    "login_heading" : {
+        'color' : 'yellow'
+    },
     "login-button" : {
-        'margin-top' : '2rem',
+        'marginTop' : '2rem',
         'display' : 'inline'
+    },
+    "password_link" : {
+        'marginTop': "1rem"
     }
 }
