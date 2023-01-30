@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Alert from '../Alert/Alert';
 import axios from 'axios';
 import validator from 'validator';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { styles } from '../../css/SignupPageCSS';
 
 const SignupPage = () => {
@@ -10,6 +12,15 @@ const SignupPage = () => {
     const [firstName, updateFirstName] = useState('');
     const [lastName, updateLastName] = useState('');
     const [setSignupAlert, updateSignupAlert] = useState('');
+    const userSelector = useSelector(state => state.auth.user);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // Redirect user if already logged in
+        if (userSelector !== null) {
+            navigate("/")
+        }
+    }, [userSelector, navigate])
 
     const signupHandler = (e) => {
         e.preventDefault();
