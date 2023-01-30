@@ -77,41 +77,47 @@ const SearchPicturesPage = () => {
     }
 
     return (
-        <div className="home-page">
-            <div style={styles['search-page-jumbotron']} className="jumbotron">
-                <div className="container">
-                    <form onSubmit={ formHandler }>
-                        <h2>Search Pictures</h2>
-                        <p>AI Art</p>
-                        { saveAlert === '' ? null : <Alert type={ saveAlert }/> }
-                        <label style={styles['prompt-label']}>Enter a sentence below describing the picture you are looking for</label>
-                        <input style={styles['prompt-input']} type="text" className='form-control' onChange={e => updateImageRequest(e.target.value)} /><br />
-                        <select style={styles['size-value-selection']} onChange={e => updateSizeValue(e.target.value)} className="form-select" aria-label="Default select example">
-                            <option>Select size</option>
-                            <option selected value="small">Small</option>
-                            <option value="medium">Medium</option>
-                            <option value="large">Large</option>
-                        </select>
-                        <button style={styles['search-button']} className='btn btn-primary'>Search</button><br />
-                        { url === 'loading...' ? <h4 style={styles['loading-label']}>Loading...</h4> : null }
-                        { 
-                            url === '' || url === 'loading...' ? null : 
-                                <>
-                                    <h3 style={styles['image-request-header']}>Your Image: { setImageRequest.charAt(0).toUpperCase() + setImageRequest.substring(1).toLowerCase() }</h3>
-                                    <img alt="" 
-                                         src={`${url}`} 
-                                         id="image" 
-                                         height={ sizeValue === 'small' ? "200" : ( sizeValue === 'medium' ? "350" : "500" )} /> 
-                                    <br />
-                                    {
-                                        saveAlert === '' ? 
-                                            <button style={styles['save-profile-button']} class="btn btn-success" onClick={() => saveHandler()}>Save Picture to Profile</button>
-                                        :
-                                            <button style={styles['save-profile-button']} class="btn btn-success" disabled>Save Picture to Profile</button>
-                                    }
-                                </>         
-                        }
-                    </form>
+        <div className='search-pictures-page'>
+            <div style={styles['search-page-jumbotron']} className="container">
+                { saveAlert === '' ? null : <Alert type={ saveAlert } /> }
+                <div className="row p-6">
+                    <div className="bg-dark col-sm-12 col-md-12 col-lg-6">
+                        <div className='d-flex-col text-white px-3 py-5'>
+                            <form onSubmit={ formHandler }>
+                                <h2 style={styles['search-page-heading']}>Search Pictures</h2>
+                                <label style={styles['prompt-label']}>Enter a sentence below describing the picture you are looking for</label>
+                                <input style={styles['prompt-input']} type="text" className='form-control' onChange={e => updateImageRequest(e.target.value)} /><br />
+                                <select style={styles['size-value-selection']} onChange={e => updateSizeValue(e.target.value)} className="form-select" aria-label="Default select example">
+                                    <option>Select size</option>
+                                    <option selected value="small">Small</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="large">Large</option>
+                                </select>
+                                <button style={styles['search-button']} className='btn btn-primary'>Search</button><br />
+                                { url === 'loading...' ? <h4 style={styles['loading-label']}>Loading...</h4> : null }
+                                { 
+                                    url === '' || url === 'loading...' ? null : 
+                                        <>
+                                            <h3 style={styles['image-request-header']}>Your Image: { setImageRequest.charAt(0).toUpperCase() + setImageRequest.substring(1).toLowerCase() }</h3>
+                                            <img alt="" 
+                                                src={`${url}`} 
+                                                id="image" 
+                                                height={ sizeValue === 'small' ? "200" : ( sizeValue === 'medium' ? "350" : "500" )} /> 
+                                            <br />
+                                            {
+                                                saveAlert === '' ? 
+                                                    <button style={styles['save-profile-button']} class="btn btn-success" onClick={() => saveHandler()}>Save Picture to Profile</button>
+                                                :
+                                                    <button style={styles['save-profile-button']} class="btn btn-success" disabled>Save Picture to Profile</button>
+                                            }
+                                        </>         
+                                }
+                            </form>
+                        </div>
+                    </div>
+                    <div className="bg-dark col-sm-12 col-md-12 text-white col-lg-6 py-5">
+                        <img className="mr-5" src={require("../../assets/images/search.png")} alt="No Text" height="350" />
+                    </div>
                 </div>
             </div>
         </div>

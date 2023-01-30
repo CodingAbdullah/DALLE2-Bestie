@@ -2,33 +2,38 @@
 
 export const styles = {
     'search-page-jumbotron' : {
-        'padding-top': '2.5rem',
-        'padding-bottom': '2.5rem', 
-        'background-color': '#EAFCFC'
+        'paddingTop': '2.5rem',
+        'paddingBottom': '2.5rem', 
+    },
+    'search-page-heading' : {
+        'color' : 'yellow'
     },
     'prompt-label' : {
-        'margin-top' : '1rem'
+        'marginTop' : '1rem',
+        'marginBottom' : '1rem',
+        'fontStyle' : 'italic'
     },
     'prompt-input' : {
-        'margin-left' : '25%',
+        'marginLeft' : '25%',
         'width': '50%'
     },
     'size-value-selection' : {
-        'margin-left' : '25%',
+        'marginLeft' : '25%',
         'width': '50%'
     },
     'search-button' : {
-        'margin-top' : '2rem',
+        'marginTop' : '2rem',
         'display' : 'inline'
     },
     'loading-label' : {
-        'margin-top' : '3rem'
+        'marginTop' : '3rem'
     },
     'image-request-header' : {
-        'margin-top' : '5rem',
-        'margin-bottom' : '1rem'
+        'marginTop' : '5rem',
+        'marginBottom' : '1rem',
+        'color' : 'yellow'
     },
     'save-profile-button' : {
-        'margin-top' : '4rem'
+        'marginTop' : '4rem'
     }
 }
