@@ -2,14 +2,26 @@
 
 export const styles = {
     "home-page-jumbotron" : {
-        'padding-top': '2.5rem', 
-        'padding-bottom': '2.5rem', 
-        'background-color': '#EAFCFC' 
+        'paddingTop': '2.5rem', 
+        'paddingBottom': '2.5rem', 
+        'backgroundColor': '#EAFCFC' 
+    },
+    "container" : {
+        'marginTop' : '2rem'
     },
     "home-description-paragraph" : {
-        'margin-top' : '2rem'
+        'marginTop' : '2rem',
+        'fontStyle' : 'italic'
     },
     "paragraph-link" : {
-        'color' : 'black'
+        'color' : 'purple'
+    },
+    "AI-ART-Title" : {
+        "marginTop" : '3rem',
+        "color" : 'yellow'
+    },
+    "button-login-search" : {
+        "marginTop" : '1rem',
+        "marginBottom" : '2rem'
     }
 }
