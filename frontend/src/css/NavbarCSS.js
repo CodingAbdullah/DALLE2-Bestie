@@ -8,6 +8,6 @@ export const styles = {
         "color" : 'grey'
     },
     "AI-Art-link" : {
-        'color': 'white', 'font-weight': 'bold'
+        'color': 'yellow', 'font-weight': 'bold'
     }
 }
