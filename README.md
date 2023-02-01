@@ -18,7 +18,6 @@ The future is now and the possibilities are endless.
 - And then... viola! The miracle happens ;)
 - Don't thank me for it, I'm just a mere developer, AI is yo bosss
 <br>
-<br>
 
 #### `Additional Features`
 
@@ -31,7 +30,7 @@ The future is now and the possibilities are endless.
 - Forgot password feature enabled (**only for GMAIL accounts**) using **Nodemailer**
 - Verification codes for verifying password resets are provided by **UUID.V4**
 <br>
-<br>
+
 #### `Tech`
 
 The site uses several technologies and tools. As the project completes, more will be added to this section :
@@ -47,7 +46,7 @@ The site uses several technologies and tools. As the project completes, more wil
 - [**AWS**] - AWS services will/were used for deploying project (AWS Amplify, EC2, Route 53, etc.)
 - [**Namecheap**] - Domain purchasing
 <br>
-<br>
+
 #### `Javascript Libraries/Dependencies`
 For both frontend/backend development of this project, the following libraries were incorporated. Without which, the development of this site would not be possible.
 
@@ -67,7 +66,7 @@ For both frontend/backend development of this project, the following libraries w
 - **react-router**
 - **validator**
 <br>
-<br>
+
 #### `License`
 
 MIT
