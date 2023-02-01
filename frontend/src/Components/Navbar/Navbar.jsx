@@ -42,7 +42,7 @@ const Navbar = () => {
     return (            
         <nav className="navbar navbar-expand-lg bg-dark">
             <div className="container-fluid">
-                <a style={styles['AI-Art-link']} className="navbar-brand" href="/">AI Art</a>
+                <a style={styles['AI-Art-link']} className="navbar-brand" href="/">DALL·E 2's Bestie</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
                 </button>
@@ -52,7 +52,7 @@ const Navbar = () => {
                             <a style={styles['link-enabled']} className="nav-link active" aria-current="page" href="/">Home</a>
                         </li>
                         <li className="nav-item">
-                            <a style={styles['link-enabled']} className="nav-link" href="/about">About</a>
+                            <a style={styles['link-enabled']} className="nav-link" href="/about">About/OpenAI</a>
                         </li>
                         { conditionalRenderingOnUserStateSelector }
                     </ul>

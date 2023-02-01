@@ -16,8 +16,16 @@ const AboutPage = () => {
                                 </p>
                         </div>                    
                     </div>
-                    <div className="bg-dark col-sm-12 col-md-12 text-white col-lg-6 py-3">
-                        <img className="p-5" src={require("../../assets/images/about.png")} alt="No text" height="350" />
+                    <div className="bg-dark col-sm-12 col-md-12 col-lg-6">
+                        <div className='d-flex-col text-white px-3 py-5'>
+                                <h2 style={ styles.open_ai_heading }>Open AI</h2>
+                                <p><a style={ styles.open_ai_link } href="https://openai.com/dall-e-2/">THE MOST AWESOME AI Imaging TOOL</a></p>
+                                <p>From the site itself... ;)</p>
+                                <p style={ styles.open_ai_paragraph }>"DALL·E 2 can create original, realistic images and art from a
+                                text description. It can combine concepts, attributes, and styles."</p>
+                                <p style={ styles.open_ai_paragraph }>"DALL·E 2 has learned the relationship between images and the text used to describe them. 
+                                It uses a process called “diffusion,” which starts with a pattern of random dots and gradually alters that pattern towards an image when it recognizes specific aspects of that image."</p>
+                        </div>
                     </div>
                 </div>
             </div>

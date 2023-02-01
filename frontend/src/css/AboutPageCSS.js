@@ -17,5 +17,16 @@ export const styles = {
     },
     'developer_paragraph' : {
         'fontStyle' : 'italic'
+    },
+    'open_ai_heading' : {
+        'color' : 'yellow'
+    },
+    'open_ai_paragraph' : {
+        'fontStyle': 'italic'
+    },
+    'open_ai_link' : {
+        'fontStyle' : 'italic',
+        'fontWeight' : 'bold',
+        'color' : 'blue'
     }
 }
