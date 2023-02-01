@@ -1,10 +1,27 @@
 require("dotenv").config({ path: '../.env' });
 const { Configuration, OpenAIApi } = require("openai");
 const UserPicture = require("../model/UserPicture");
+const AWS = require('aws-sdk');
+const buffer = require("buffer");
+
+// Create a new bucket in a region specified with credentials to access an existing one or create a new one
+
+// Using the URL provided by the user from the create image request, create a new image URL to upload to AWS S3 and store
+// the actual AWS S3 Image URL to MongoDB to persist OpenAI's created image
+
+// Set up AWS configuration here and AWS S3 Bucket as well
+var AWS = AWS.config.update({ region : process.env.AWS_S3_REGION_NAME });
+
+// AWS S3 Bucket should be up and running..
+let S3 = new AWS.S3({
+    apiVersion: '2006-03-01',
+    accessKeyId: process.env.AWS_S3_SECRET_KEY,
+    secretAccessKey: process.env.AWS_S3_ACCESS_KEY,
+});
 
 exports.fetchMyPictures = (req, res) => {
     const { email } = JSON.parse(req.body.body);
-
+    
     // Fetch all the pictures requested by the user in the past and send as response
     UserPicture.find( { email }, (err, docs) => {
         if (err) {
@@ -53,6 +70,7 @@ exports.createAPicture = (req, res) => {
         size: size === 'small' ? '256x256' : ( size === 'medium' ? '512x512' : '1024x1024' ) // small, medium, or large
     })
     .then(response => {
+        // Once response is sent, send back URL to confirm with user if they want to save it to db or not
         res.status(200).json({
             message: 'Success',
             url : response.data.data

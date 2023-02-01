@@ -19,7 +19,8 @@ exports.verifyJWTMiddleware = (req, res, next) => {
                 });
             }
             else {
-                // If verified, send request over to the next piece of middleware, or in this case, controller
+                // If verified, send request over to the next piece of middleware add users email to request body
+                req.body.body = result.data;
                 next();
             }
         });
