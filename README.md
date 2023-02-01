@@ -1,9 +1,9 @@
 # DALL·E 2's BESTIE
-#### _A friendly implementation for creating/storing/retrieving AI Generated Images using DALL·E 2
+#### _A friendly implementation for creating/storing/retrieving AI Generated Images using DALL·E 2_
 
 <br>
 
-The creators of ChatGPT have released their beta version of the API responsible for the many slick things AI can do, DALL·E 2. **Create, store and retrieve AI generated images with this site**. 
+The creators of ChatGPT have released their beta version of the API responsible for the many slick things DALL·E 2 can do. **Create, store and retrieve AI generated images with this site**. 
 
 All the source code for creating the site from the ground up, front to back, can be found here. For further documentation, please refer to the relevant section on technologies used.
 
@@ -51,6 +51,7 @@ The site uses several technologies and tools. As the project completes, more wil
 For both frontend/backend development of this project, the following libraries were incorporated. Without which, the development of this site would not be possible.
 
 - **axios**
+- **aws-sdk**
 - **bcryptjs**
 - **cors**
 - **dotenv**
@@ -60,6 +61,7 @@ For both frontend/backend development of this project, the following libraries w
 - **mongodb**
 - **mongoose**
 - **nodemailer**
+- **npm**
 - **OpenAI - DALL·E 2**
 - **react**
 - **redux/toolkit**

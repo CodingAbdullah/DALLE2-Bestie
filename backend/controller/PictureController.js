@@ -3,6 +3,7 @@ const { Configuration, OpenAIApi } = require("openai");
 const UserPicture = require("../model/UserPicture");
 const AWS = require('aws-sdk');
 const buffer = require("buffer");
+const axios = require("axios");
 
 // Create a new bucket in a region specified with credentials to access an existing one or create a new one
 
@@ -14,7 +15,6 @@ var AWS = AWS.config.update({ region : process.env.AWS_S3_REGION_NAME });
 
 // AWS S3 Bucket should be up and running..
 let S3 = new AWS.S3({
-    apiVersion: '2006-03-01',
     accessKeyId: process.env.AWS_S3_SECRET_KEY,
     secretAccessKey: process.env.AWS_S3_ACCESS_KEY,
 });
@@ -39,21 +39,47 @@ exports.fetchMyPictures = (req, res) => {
 }
 
 exports.insertPicture = (req, res) => {
-    const { email, search, size, url } = JSON.parse(req.body.body);
-    let newUserPicture = new UserPicture({ email, search, size, url });
+    const { email, user, search, size, url } = JSON.parse(req.body.body);
 
-    // Insert picture into database if user requests to
-    newUserPicture.save()
-    .then(() => {
-        res.status(201).json({
-            message: "Picture saved to database"
-        });
+    // Make API call to retrieve User image from OpenAI URL in order to create a blob, upload to S3, upload S3 URL to MongoDB
+    // If URL is true, create a blob with the URL processed 
+    axios.get(url)
+    .then(response => {
+        let blobber = response.data.buffer();
+
+        // Once the blob is created, upload to S3 Bucket
+        S3.upload({
+            Bucket: process.env.AWS_S3_BUCKET_NAME,
+            Key: email + user.numberOfPictures, // A unique identifier for S3 upload URL, help to iterate through images later
+            Body: blobber
+        })
+        .then(response => {
+                let newUserPicture = new UserPicture({ email, search, size, url : response.location });
+
+                // Insert picture into MongDB with AWS S3 URL instead
+                newUserPicture.save()
+                .then(() => {
+                    res.status(201).json({
+                        message: "Picture saved to database"
+                    });
+                })
+                .catch(() => {
+                    res.status(200).json({
+                        message: "Picture could not be saved to database"
+                    });
+                });
+        })
+        .catch(() => {
+            res.status(200).json({
+                message: "Cannot upload image to AWS S3"
+            });
+        })
     })
     .catch(() => {
         res.status(200).json({
-            message: "Picture could not be saved to database"
+            message: "URL expired or invalid" 
         });
-    });
+    })
 }
 
 exports.createAPicture = (req, res) => {
