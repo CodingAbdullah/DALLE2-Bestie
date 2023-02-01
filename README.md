@@ -20,7 +20,6 @@ The future is now and the possibilities are endless.
 <br>
 <br>
 
- 
 #### `Additional Features`
 
 - User signin/login/logout supported
@@ -33,7 +32,6 @@ The future is now and the possibilities are endless.
 - Verification codes for verifying password resets are provided by **UUID.V4**
 <br>
 <br>
-
 #### `Tech`
 
 The site uses several technologies and tools. As the project completes, more will be added to this section :
@@ -50,8 +48,6 @@ The site uses several technologies and tools. As the project completes, more wil
 - [**Namecheap**] - Domain purchasing
 <br>
 <br>
-
-
 #### `Javascript Libraries/Dependencies`
 For both frontend/backend development of this project, the following libraries were incorporated. Without which, the development of this site would not be possible.
 
@@ -72,8 +68,6 @@ For both frontend/backend development of this project, the following libraries w
 - **validator**
 <br>
 <br>
-
-
 #### `License`
 
 MIT
