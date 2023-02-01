@@ -9,7 +9,7 @@ const HomePage = () => {
 
     return (
         <div className='home-page'>
-            <div style={styles.container} className="bg-primary container">
+            <div style={ styles.container } className="container">
                 <div className="row">
                     <div className="bg-dark col-sm-12 col-md-12 col-lg-6">
                         <div className='d-flex-col'>
