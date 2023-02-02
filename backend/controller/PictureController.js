@@ -1,8 +1,8 @@
 require("dotenv").config({ path: '../.env' });
 const { Configuration, OpenAIApi } = require("openai");
 const UserPicture = require("../model/UserPicture");
+const User = require('../model/User');
 const AWS = require('aws-sdk');
-const buffer = require("buffer");
 const axios = require("axios");
 
 // Create a new bucket in a region specified with credentials to access an existing one or create a new one
@@ -40,12 +40,12 @@ exports.fetchMyPictures = (req, res) => {
 
 exports.insertPicture = (req, res) => {
     const { email, user, search, size, url } = JSON.parse(req.body.body);
-
+    
     // Make API call to retrieve User image from OpenAI URL in order to create a blob, upload to S3, upload S3 URL to MongoDB
     // If URL is true, create a blob with the URL processed 
-    axios.get(url)
+    axios.get(url, { responseType: 'arraybuffer' })
     .then(response => {
-        let blobber = response.data.buffer();
+        let blobber = Buffer.from(response.data, 'binary').toString('base64');
 
         // Once the blob is created, upload to S3 Bucket
         S3.upload({
@@ -59,8 +59,27 @@ exports.insertPicture = (req, res) => {
                 // Insert picture into MongDB with AWS S3 URL instead
                 newUserPicture.save()
                 .then(() => {
-                    res.status(201).json({
-                        message: "Picture saved to database"
+                    // Once picture has been saved to mongoDB, update User number of pictures attribute
+                    User.find( { email }, (err, docs) => {
+                        if (err) {
+                            res.status(200).json({
+                                messge: "Picture was saved to db but count not updated"
+                            });
+                        }
+                        else {
+                            let userData = docs[0];
+                            User.updateOne({ email }, { $set : { numberOfPictures : userData.numberOfPictures + 1 }})
+                            .then(() => {
+                                res.status(201).json({
+                                    message: 'User picture uploaded and count updated'
+                                });
+                            })
+                            .catch(() => {
+                                res.status(200).json({
+                                    message : "Picture saved to db but unable to update user"
+                                });
+                            })
+                        }
                     });
                 })
                 .catch(() => {
@@ -79,7 +98,7 @@ exports.insertPicture = (req, res) => {
         res.status(200).json({
             message: "URL expired or invalid" 
         });
-    })
+    });
 }
 
 exports.createAPicture = (req, res) => {
