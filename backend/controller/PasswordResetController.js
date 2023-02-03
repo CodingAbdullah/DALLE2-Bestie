@@ -36,10 +36,10 @@ exports.PasswordResetController = (req, res) => {
                                 // Once verified, delete token from database and pass control to the succeeding middleware
                                 EmailToken.deleteOne({ email })
                                 .then(() => {
-                                    User.updateOne({ email : { $set : { password : hash } }})
+                                    User.updateOne({ email : email }, { $set : { password : hash } })
                                     .then(() => {
                                         res.status(200).json({
-                                            message: 'Password succesfully updated and stored to db',
+                                            message: 'Password successfully updated and stored to db',
                                             verified: true,
                                             updated: true
                                         });

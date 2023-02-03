@@ -61,27 +61,17 @@ exports.insertPicture = (req, res) => {
                 // Insert picture into MongDB with AWS S3 URL instead
                 newUserPicture.save()
                 .then(() => {
-                    // Once picture has been saved to mongoDB, update User number of pictures attribute
-                    User.find( { email }, (err, docs) => {
-                        if (err) {
-                            res.status(200).json({
-                                messge: "Picture was saved to db but count not updated"
-                            });
-                        }
-                        else {
-                            let userData = docs[0];
-                            User.updateOne({ email }, { $set : { numberOfPictures : userData.numberOfPictures + 1 }})
-                            .then(() => {
-                                res.status(201).json({
-                                    message: 'User picture uploaded and count updated'
-                                });
-                            })
-                            .catch(() => {
-                                res.status(200).json({
-                                    message : "Picture saved to db but unable to update user"
-                                });
-                            })
-                        }
+                    // Update user information using the user object passed in the middleware to request and return
+                    User.updateOne({ email : email }, { $set : { numberOfPictures : user.numberOfPictures + 1 }})
+                    .then(() => {
+                        res.status(201).json({
+                            message: 'User picture uploaded and count updated'
+                        });
+                    })
+                    .catch(() => {
+                        res.status(200).json({
+                            message : "Picture saved to db but unable to update user"
+                        });
                     });
                 })
                 .catch(() => {
