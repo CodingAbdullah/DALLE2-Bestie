@@ -11,13 +11,15 @@ const axios = require("axios");
 // the actual AWS S3 Image URL to MongoDB to persist OpenAI's created image
 
 // Set up AWS configuration here and AWS S3 Bucket as well
-var AWS = AWS.config.update({ region : process.env.AWS_S3_REGION_NAME });
+/*
+AWS.config.update({ region : process.env.AWS_S3_REGION_NAME });
 
 // AWS S3 Bucket should be up and running..
 let S3 = new AWS.S3({
     accessKeyId: process.env.AWS_S3_SECRET_KEY,
     secretAccessKey: process.env.AWS_S3_ACCESS_KEY,
 });
+*/
 
 exports.fetchMyPictures = (req, res) => {
     const { email } = JSON.parse(req.body.body);
@@ -25,12 +27,12 @@ exports.fetchMyPictures = (req, res) => {
     // Fetch all the pictures requested by the user in the past and send as response
     UserPicture.find( { email }, (err, docs) => {
         if (err) {
-            res.status(400).json({
+            res.status(200).json({
                 message: "No User affilated searches found"
             });
         }
         else {
-            res.status(200).json({
+            res.status(201).json({
                 message: "Pictures pertaining to the User found",
                 docs
             });
@@ -92,7 +94,7 @@ exports.insertPicture = (req, res) => {
             res.status(200).json({
                 message: "Cannot upload image to AWS S3"
             });
-        })
+        });
     })
     .catch(() => {
         res.status(200).json({

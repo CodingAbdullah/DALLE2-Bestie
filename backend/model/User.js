@@ -21,12 +21,11 @@ const User = new mongoose.Schema({
     numberOfPictures : {
         type: Number,
         required: true
-    },
-    time: {
-        type: Date, 
-        required: true,
-        default: Date.now
     }
-});
+},
+{
+    timestamps : true
+}
+);
 
 module.exports = mongoose.model('User', User);

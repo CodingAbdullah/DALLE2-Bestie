@@ -1,6 +1,7 @@
 // As this is middleware, verification will be required before sending to controller, hence this is a protected route
 require('dotenv').config({ path: '../../.env' });
 const jwt = require("jsonwebtoken");
+const User = require("../model/User"); // Adding User model to fetch data based on email
 
 exports.verifyJWTMiddleware = (req, res, next) => {
     if (req.body.headers.Authorization === undefined || req.body.headers.Authorization === null) {
@@ -19,9 +20,21 @@ exports.verifyJWTMiddleware = (req, res, next) => {
                 });
             }
             else {
-                // If verified, send request over to the next piece of middleware add users email to request body
-                req.body.body = result.data;
-                next();
+                // If verified, find User information using email within the token, add to req body and move to next middleware
+                User.find({ email : [result.data] }, (err, docs) => {
+                    if (err) {
+                        res.status(401).json({
+                            message: "Cannot find user with that value",
+                            token: true
+                        })
+                    }
+                    else {
+                        // If authenticated, move to the next piece of middleware and add user to req object
+                        console.log(docs[0]);
+                        req.body.body.user = docs[0];
+                        next();
+                    }
+                })
             }
         });
     }
