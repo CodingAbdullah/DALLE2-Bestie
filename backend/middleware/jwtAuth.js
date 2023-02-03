@@ -30,7 +30,9 @@ exports.verifyJWTMiddleware = (req, res, next) => {
                     }
                     else {
                         // If authenticated, move to the next piece of middleware and add user to req object
-                        req.body.body.user = docs[0];
+                        let ogReq = JSON.parse(req.body.body);
+                        ogReq.user = docs[0];
+                        req.body.body = JSON.stringify(ogReq);
                         next();
                     }
                 })

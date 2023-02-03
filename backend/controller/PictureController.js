@@ -2,7 +2,7 @@ require("dotenv").config({ path: '../.env' });
 const { Configuration, OpenAIApi } = require("openai");
 const UserPicture = require("../model/UserPicture");
 const User = require('../model/User');
-const AWS = require('aws-sdk');
+let S3 = require('aws-sdk/clients/s3');
 const axios = require("axios");
 
 // Create a new bucket in a region specified with credentials to access an existing one or create a new one
@@ -11,15 +11,14 @@ const axios = require("axios");
 // the actual AWS S3 Image URL to MongoDB to persist OpenAI's created image
 
 // Set up AWS configuration here and AWS S3 Bucket as well
-/*
-AWS.config.update({ region : process.env.AWS_S3_REGION_NAME });
+let configuration = {
+    accessKeyId : process.env.AWS_S3_ACCESS_ID,
+    accessSecretKey: process.env.AWS_S3_SECRET_KEY,
+    region: process.env.AWS_S3_REGION_NAME
+}
 
 // AWS S3 Bucket should be up and running..
-let S3 = new AWS.S3({
-    accessKeyId: process.env.AWS_S3_SECRET_KEY,
-    secretAccessKey: process.env.AWS_S3_ACCESS_KEY,
-});
-*/
+S3 = new S3(configuration);
 
 exports.fetchMyPictures = (req, res) => {
     const { email } = JSON.parse(req.body.body);
@@ -27,12 +26,12 @@ exports.fetchMyPictures = (req, res) => {
     // Fetch all the pictures requested by the user in the past and send as response
     UserPicture.find( { email }, (err, docs) => {
         if (err) {
-            res.status(200).json({
+            res.status(400).json({
                 message: "No User affilated searches found"
             });
         }
         else {
-            res.status(201).json({
+            res.status(200).json({
                 message: "Pictures pertaining to the User found",
                 docs
             });
@@ -42,21 +41,23 @@ exports.fetchMyPictures = (req, res) => {
 
 exports.insertPicture = (req, res) => {
     const { email, user, search, size, url } = JSON.parse(req.body.body);
-    
+
     // Make API call to retrieve User image from OpenAI URL in order to create a blob, upload to S3, upload S3 URL to MongoDB
     // If URL is true, create a blob with the URL processed 
-    axios.get(url, { responseType: 'arraybuffer' })
+    axios.get(url)
     .then(response => {
-        let blobber = Buffer.from(response.data, 'binary').toString('base64');
-
+        // let blobber = response.buffer(); //Buffer.from(response.data, 'binary').toString('base64');
         // Once the blob is created, upload to S3 Bucket
-        S3.upload({
-            Bucket: process.env.AWS_S3_BUCKET_NAME,
-            Key: email + user.numberOfPictures, // A unique identifier for S3 upload URL, help to iterate through images later
-            Body: blobber
+        return   S3.upload({
+                            Bucket: process.env.AWS_S3_BUCKET_NAME,
+                            Key: email + user.numberOfPictures + '.png', // A unique identifier for S3 upload URL, help to iterate through images later
+                            Body: response.data
+                    })
+                    .promise();
         })
-        .then(response => {
-                let newUserPicture = new UserPicture({ email, search, size, url : response.location });
+        .then(obj => {
+                console.log(obj);
+                let newUserPicture = new UserPicture({ email, search, size, url : obj.Location });
 
                 // Insert picture into MongDB with AWS S3 URL instead
                 newUserPicture.save()
@@ -80,17 +81,12 @@ exports.insertPicture = (req, res) => {
                     });
                 });
         })
-        .catch(() => {
+        .catch((err) => {
+            console.log(err)
             res.status(200).json({
                 message: "Cannot upload image to AWS S3"
             });
         });
-    })
-    .catch(() => {
-        res.status(200).json({
-            message: "URL expired or invalid" 
-        });
-    });
 }
 
 exports.createAPicture = (req, res) => {
