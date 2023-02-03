@@ -20,7 +20,7 @@ let configuration = {
 // AWS S3 Bucket should be up and running..
 S3 = new S3(configuration);
 
-exports.fetchMyPictures = (req, res) => {
+exports.fetchPictures = (req, res) => {
     const { email } = JSON.parse(req.body.body);
     
     // Fetch all the pictures requested by the user in the past and send as response
@@ -39,18 +39,18 @@ exports.fetchMyPictures = (req, res) => {
     });
 }
 
-exports.insertPicture = (req, res) => {
+exports.insertAPicture = (req, res) => {
     const { email, user, search, size, url } = JSON.parse(req.body.body);
 
     // Make API call to retrieve User image from OpenAI URL in order to create a blob, upload to S3, upload S3 URL to MongoDB
     // If URL is true, create a blob with the URL processed 
-    axios.get(url)
+    axios.get(url, { responseType: "blob" })
     .then(response => {
         // let blobber = response.buffer(); //Buffer.from(response.data, 'binary').toString('base64');
         // Once the blob is created, upload to S3 Bucket
         return   S3.upload({
                             Bucket: process.env.AWS_S3_BUCKET_NAME,
-                            Key: email + user.numberOfPictures + '.png', // A unique identifier for S3 upload URL, help to iterate through images later
+                            Key: email + user.numberOfPictures, // A unique identifier for S3 upload URL, help to iterate through images later
                             Body: response.data
                     })
                     .promise();
@@ -81,8 +81,7 @@ exports.insertPicture = (req, res) => {
                     });
                 });
         })
-        .catch((err) => {
-            console.log(err)
+        .catch(() => {
             res.status(200).json({
                 message: "Cannot upload image to AWS S3"
             });
@@ -113,5 +112,44 @@ exports.createAPicture = (req, res) => {
         res.status(401).json({
             message: err
         });
+    });
+}
+
+exports.deleteAPicture = (req, res) => {
+    const { user, url } = JSON.parse(req.body.body);
+
+    let params = {
+        Bucket: process.env.AWS_S3_BUCKET_NAME,
+        Key: url.split("%40")[0] + "@" + url.split("%40")[1] // Split on @=%40 and combine the two
+    }
+
+    // Delete object from bucket using the specified parameters outlined above
+    S3.deleteObject(params, (err, data) => {
+        if (err) {
+            res.status(400).json({
+                message: "Could not delete image " + err
+            });
+        }
+        else {
+            UserPicture.deleteOne({ url : url })
+            .then(() => {
+                User.updateOne({ email: user.email }, { $set : { numberOfPictures : user.numberOfPictures - 1 }})
+                .then(() => {
+                    res.status(200).json({
+                        message: "Successful deletion of image and user image count revised"
+                    });
+                })
+                .catch((err) => {
+                    res.status(400).json({
+                        message: "Image deleted, however User image count was not revised " + err 
+                    });
+                });
+            })
+            .catch((err) => {
+                res.status(400).json({
+                    message: "Image could not be deleted " + err
+                });
+            });
+        }
     });
 }

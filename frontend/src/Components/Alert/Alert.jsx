@@ -68,7 +68,7 @@ const Alert = (props) => {
             alertType = 'danger';
             break;
         case "fetch-pictures-empty":
-            msg = "No pictures are saved under you name! Search n Save ;)"
+            msg = "No pictures are saved under your name! Search n Save ;)"
             alertType = 'warning';
             break;
         default:

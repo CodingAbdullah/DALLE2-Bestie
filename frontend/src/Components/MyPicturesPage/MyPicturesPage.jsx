@@ -34,17 +34,15 @@ const MyPicturesPage = () => {
 
             axios.post("http://localhost:5000/fetch-pictures", options)
             .then(response => {
-                if (response.status === 201) {
-                    updateUserPictures((prevState) => {
-                        return {
-                            ...prevState,
-                            information: response.data
-                        }
-                    });
+                if (response.data.docs.length === 0) {
+                    setEmptyAlert("fetch-pictures-empty");   
                 }
-                else {
-                    setEmptyAlert("fetch-pictures-empty");
-                }
+                updateUserPictures((prevState) => {
+                    return {
+                        ...prevState,
+                        information: response.data
+                    }
+                });
             })
             .catch(() => {
                 dispatch(logout()); // Logout the user immediately if token is invalid or nonexistant and redirect
@@ -56,24 +54,13 @@ const MyPicturesPage = () => {
     if (userPictures.information === null) {
         return <div>Loading...</div>
     }
-    else if (emptyAlert === "fetch-pictures-empty") {
-        return (
-            <div className='my-pictures-page'>
-                <Alert type={ emptyAlert} />
-                <div className='bg-dark table-container container'>
-                    <h1 style={ styles['h1-searches-label'] }>Your Saved Picture Searches</h1>
-                    <p style={ styles.image_list_paragraph }>View your saved pictures</p>
-                    <button style={styles['home-button']} className="btn btn-primary" onClick={ () => navigate("/") }>Go Home</button>
-                </div>
-            </div> 
-        )  
-    }
     else {
         return (
             <div className='my-pictures-page'>
                 <div className='bg-dark table-container container'>
                     <h1 style={ styles['h1-searches-label'] }>Your Saved Picture Searches</h1>
                     <p style={ styles.image_list_paragraph }>View your saved pictures</p>
+                    { emptyAlert !== '' ? <Alert type={ emptyAlert } /> : null } 
                     <div className="row">
                         {
                             userPictures.information.docs.map(pic => {
