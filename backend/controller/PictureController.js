@@ -48,7 +48,7 @@ exports.insertAPicture = (req, res) => {
     .then(response => {
         // let blobber = response.buffer(); //Buffer.from(response.data, 'binary').toString('base64');
         // Once the blob is created, upload to S3 Bucket
-        let number = Number.parseInt(user.numberOfPictures) + 1;
+        let number = Number.parseInt(user.totalStoredPictures) + 1;
         return   S3.upload({
                             Bucket: process.env.AWS_S3_BUCKET_NAME,
                             Key: email + number, // A unique identifier for S3 upload URL, help to iterate through images later
@@ -63,7 +63,7 @@ exports.insertAPicture = (req, res) => {
                 newUserPicture.save()
                 .then(() => {
                     // Update user information using the user object passed in the middleware to request and return
-                    User.updateOne({ email : email }, { $set : { numberOfPictures : user.numberOfPictures + 1 }})
+                    User.updateOne({ email : email }, { $set : { numberOfPictures : user.numberOfPictures + 1, totalStoredPictures: user.totalStoredPictures + 1 }})
                     .then(() => {
                         res.status(201).json({
                             message: 'User picture uploaded and count updated'

@@ -21,6 +21,10 @@ const User = new mongoose.Schema({
     numberOfPictures : {
         type: Number,
         required: true
+    },
+    totalStoredPictures : {
+        type: Number,
+        required: true
     }
 },
 {

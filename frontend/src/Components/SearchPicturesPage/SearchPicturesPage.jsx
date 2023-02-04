@@ -78,23 +78,23 @@ const SearchPicturesPage = () => {
 
     return (
         <div className='search-pictures-page'>
-            <div style={styles['search-page-jumbotron']} className="container">
+            <div style={ styles['search-page-jumbotron'] } className="container">
                 { saveAlert === '' ? null : <Alert type={ saveAlert } /> }
                 <div className="row p-6">
                     <div className="bg-dark col-sm-12 col-md-12 col-lg-6">
                         <div className='d-flex-col text-white px-3 py-5'>
                             <form onSubmit={ formHandler }>
-                                <h2 style={styles['search-page-heading']}>Search Pictures</h2>
-                                <label style={styles['prompt-label']}>Enter a sentence below describing the picture you are looking for</label>
-                                <input style={styles['prompt-input']} type="text" className='form-control' onChange={e => updateImageRequest(e.target.value)} /><br />
-                                <select style={styles['size-value-selection']} onChange={e => updateSizeValue(e.target.value)} className="form-select" aria-label="Default select example">
+                                <h2 style={ styles['search-page-heading'] }>Search Pictures</h2>
+                                <label style={ styles['prompt-label'] }>Enter a sentence below describing the picture you are looking for</label>
+                                <input style={ styles['prompt-input'] } type="text" className='form-control' onChange={ e => updateImageRequest(e.target.value)  } /><br />
+                                <select style={ styles['size-value-selection'] } onChange={ e => updateSizeValue(e.target.value) } className="form-select" aria-label="Default select example">
                                     <option>Select size</option>
                                     <option selected value="small">Small</option>
                                     <option value="medium">Medium</option>
                                     <option value="large">Large</option>
                                 </select>
-                                <button style={styles['search-button']} className='btn btn-primary'>Search</button><br />
-                                { url === 'loading...' ? <h4 style={styles['loading-label']}>Loading...</h4> : null }
+                                <button style={ styles['search-button'] } className='btn btn-primary'>Search</button><br />
+                                { url === 'loading...' ? <h4 style={ styles['loading-label'] }>Loading...</h4> : null }
                                 { 
                                     url === '' || url === 'loading...' ? null : 
                                         <>
@@ -106,9 +106,9 @@ const SearchPicturesPage = () => {
                                             <br />
                                             {
                                                 saveAlert === '' ? 
-                                                    <button style={styles['save-profile-button']} className="btn btn-success" onClick={() => saveHandler()}>Save Picture to Profile</button>
+                                                    <button style={ styles['save-profile-button'] } className="btn btn-success" onClick={ () => saveHandler() }>Save Picture to Profile</button>
                                                 :
-                                                    <button style={styles['save-profile-button']} className="btn btn-success" disabled>Save Picture to Profile</button>
+                                                    <button style={ styles['save-profile-button'] } className="btn btn-success" disabled>Save Picture to Profile</button>
                                             }
                                         </>         
                                 }
@@ -116,7 +116,7 @@ const SearchPicturesPage = () => {
                         </div>
                     </div>
                     <div className="bg-dark col-sm-12 col-md-12 text-white col-lg-6 py-5">
-                        <img className="mr-5" src={require("../../assets/images/search.png")} alt="No Text" height="350" />
+                        <img className="mr-5" src={ require("../../assets/images/search.png") } alt="No Text" height="350" />
                     </div>
                 </div>
             </div>

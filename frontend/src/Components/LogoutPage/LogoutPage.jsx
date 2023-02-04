@@ -25,7 +25,7 @@ const LogoutPage = () => {
                 <div className="container">
                     <h2>Logged Out</h2>
                     <p>Hope you enjoyed your stay and have a productive rest of your day!</p>
-                    <button style={styles['home-button']} className="btn btn-success" onClick={ () => navigate("/") }>Home</button>
+                    <button style={ styles['home-button'] } className="btn btn-success" onClick={ () => navigate("/") }>Home</button>
                 </div>
             </div>
         </div>

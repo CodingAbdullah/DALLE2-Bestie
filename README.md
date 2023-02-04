@@ -1,4 +1,4 @@
-# DALL·E 2's BESTIE
+# DALL·E 2's Bestie
 #### _A friendly implementation for creating/storing/retrieving AI Generated Images using DALL·E 2_
 
 <br>

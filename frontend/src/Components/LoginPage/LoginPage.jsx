@@ -48,25 +48,25 @@ const LoginPage = () => {
     else {
         return (
             <div className='login-page'>
-                <div style={styles.jumbotron} className="container">
+                <div style={ styles.jumbotron } className="container">
                 { setLoginAlert === '' ? null : <Alert type={ setLoginAlert } />  }
                     <div className="row">
                         <div className="bg-dark col-sm-12 col-md-12 col-lg-6">
                             <div className='d-flex-col text-white px-3 py-5'>
                                 <form onSubmit={ loginHandler }>
-                                    <h2 style={styles.login_heading}>Login</h2>
-                                    <p style={styles.label}>Enter in credentials to proceed</p>
-                                    <label style={styles['email-address-label']}>Email Address </label>
-                                    <input style={styles['email-address-input']} type="email" className="form-control" onChange={e => updateEmailAddress(e.target.value)} />
-                                    <label style={styles['password-label']}>Password </label>
-                                    <input style={styles['password-input']} type="password" className="form-control" onChange={e => updatePassword(e.target.value)} />
+                                    <h2 style={ styles.login_heading }>Login</h2>
+                                    <p style={ styles.label }>Enter in credentials to proceed</p>
+                                    <label style={ styles['email-address-label'] }>Email Address </label>
+                                    <input style={ styles['email-address-input'] } type="email" className="form-control" onChange={ e => updateEmailAddress(e.target.value) } />
+                                    <label style={ styles['password-label'] }>Password </label>
+                                    <input style={ styles['password-input'] } type="password" className="form-control" onChange={ e => updatePassword(e.target.value) } />
                                     <a style={ styles.password_link } href="/forgot-password">Forgot Password</a><br />
-                                    <button style={styles['login-button']} className='btn btn-primary'>Login</button>
+                                    <button style={ styles['login-button'] } className='btn btn-primary'>Login</button>
                                 </form>
                             </div>                    
                         </div>
                         <div className="bg-dark col-sm-12 col-md-12 text-white col-lg-6 py-5">
-                            <img className="p-5" src={require("../../assets/images/login.png")} alt="No Text" height="350" />
+                            <img className="p-5" src={ require("../../assets/images/login.png") } alt="No Text" height="350" />
                         </div>
                     </div>
                 </div>

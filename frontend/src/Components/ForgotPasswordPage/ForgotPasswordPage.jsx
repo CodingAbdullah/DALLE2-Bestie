@@ -142,7 +142,7 @@ const ForgotPasswordPage = () => {
                                             </>
                                     } 
                                 </form>
-                                <section style={styles['verify-token-section']} >
+                                <section style={ styles['verify-token-section'] } >
                                     { 
                                         isVerified && isCodeCreated ? 
                                             <form onSubmit={ resetPasswordHandler }>
@@ -173,7 +173,7 @@ const ForgotPasswordPage = () => {
                         </div>
                     </div>
                     <div className="bg-dark col-sm-12 col-md-12 text-white col-lg-6 py-5">
-                        <img className="mr-5" src={require("../../assets/images/fp.png")} alt="No Text" height="350" />
+                        <img className="mr-5" src={ require("../../assets/images/fp.png") } alt="No Text" height="350" />
                     </div>
                 </div>
             </div>

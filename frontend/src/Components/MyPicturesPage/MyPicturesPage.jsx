@@ -98,13 +98,13 @@ const MyPicturesPage = () => {
                             userPictures.information.docs.map(pic => {
                                 return (
                                     <div className="col-sm-12 col-md-6 col-lg-3 gx-1.5 gy-1.5 p-3">
-                                        <PictureItem deletePicture={deleteHandler} picture={pic} />
+                                        <PictureItem deletePicture={ deleteHandler } picture={pic} />
                                     </div>
                                 )
                             })
                         }
                     </div>
-                    <button style={styles['home-button']} className="btn btn-primary" onClick={ () => navigate("/") }>Go Home</button>
+                    <button style={ styles['home-button'] } className="btn btn-primary" onClick={ () => navigate("/") }>Go Home</button>
                 </div>
             </div>
         )

@@ -10,9 +10,9 @@ const Footer = () => {
         <div className="footer footer-container container">
             <footer>
                 <p className="copyright-paragraph">{ statement }
-                    <a style={styles['react-link']} href="https://reactjs.org/" target="_blank" rel="noreferrer">
-                        <span style={styles['span-react']}>React</span></a>
-                    <img className="react-logo" style={styles['react-logo']} src={require("../../assets/images/react.svg").default} alt="logo" />
+                    <a style={ styles['react-link']} href="https://reactjs.org/" target="_blank" rel="noreferrer">
+                        <span style={ styles['span-react'] }>React</span></a>
+                    <img className="react-logo" style={ styles['react-logo'] } src={ require("../../assets/images/react.svg").default } alt="logo" />
                 </p>
             </footer>
         </div>
