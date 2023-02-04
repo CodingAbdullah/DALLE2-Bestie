@@ -71,6 +71,10 @@ const Alert = (props) => {
             msg = "No pictures are saved under your name! Search n Save ;)"
             alertType = 'warning';
             break;
+        case "delete-success":
+            msg = "Requested picture was deleted"
+            alertType = 'success';
+            break;
         default:
             break;
     }

@@ -12,6 +12,7 @@ const MyPicturesPage = () => {
     const dispatch = useDispatch(); 
     const navigate = useNavigate(); 
     const [emptyAlert, setEmptyAlert] = useState("");  
+    const [deleteAlert, updateDeleteAlert] = useState("");
     
     const [userPictures, updateUserPictures] = useState({
         information: null
@@ -51,6 +52,36 @@ const MyPicturesPage = () => {
         }
     }, []);
 
+    const deleteHandler = (e) => {
+        let buttonURL = e.target.value;
+
+        let options = {
+            method: 'POST',
+            body: JSON.stringify({ url : buttonURL }),
+            headers: {
+                'content-type' : 'application/json',
+                'Authorization' : "Bearer " + userSelector.token
+            }
+        }
+
+        axios.post('http://localhost:5000/delete-picture', options)
+        .then(() => {
+            // If delete was successful, remove picture from user picture based on url
+            let updatePicturesList = userPictures.information.docs.filter(pic => pic.url !== buttonURL);
+            updateDeleteAlert('delete-success');
+            updateUserPictures(prevState => {
+                return {
+                    ...prevState,
+                    information: updatePicturesList
+                }
+            });
+        }) 
+        .catch(() => {
+            dispatch(logout()); // Logout the user immediately if token is invalid or nonexistant and redirect
+            navigate("/")
+        });
+    }
+
     if (userPictures.information === null) {
         return <div>Loading...</div>
     }
@@ -58,6 +89,7 @@ const MyPicturesPage = () => {
         return (
             <div className='my-pictures-page'>
                 <div className='bg-dark table-container container'>
+                    { deleteAlert !== '' ? <Alert type={ deleteAlert } /> : null } 
                     <h1 style={ styles['h1-searches-label'] }>Your Saved Picture Searches</h1>
                     <p style={ styles.image_list_paragraph }>View your saved pictures</p>
                     { emptyAlert !== '' ? <Alert type={ emptyAlert } /> : null } 
@@ -66,7 +98,7 @@ const MyPicturesPage = () => {
                             userPictures.information.docs.map(pic => {
                                 return (
                                     <div className="col-sm-12 col-md-6 col-lg-3 gx-1.5 gy-1.5 p-3">
-                                        <PictureItem picture={pic} />
+                                        <PictureItem deletePicture={deleteHandler} picture={pic} />
                                     </div>
                                 )
                             })

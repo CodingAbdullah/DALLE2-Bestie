@@ -48,15 +48,15 @@ exports.insertAPicture = (req, res) => {
     .then(response => {
         // let blobber = response.buffer(); //Buffer.from(response.data, 'binary').toString('base64');
         // Once the blob is created, upload to S3 Bucket
+        let number = Number.parseInt(user.numberOfPictures) + 1;
         return   S3.upload({
                             Bucket: process.env.AWS_S3_BUCKET_NAME,
-                            Key: email + user.numberOfPictures, // A unique identifier for S3 upload URL, help to iterate through images later
+                            Key: email + number, // A unique identifier for S3 upload URL, help to iterate through images later
                             Body: response.data
                     })
                     .promise();
         })
         .then(obj => {
-                console.log(obj);
                 let newUserPicture = new UserPicture({ email, search, size, url : obj.Location });
 
                 // Insert picture into MongDB with AWS S3 URL instead
@@ -117,10 +117,10 @@ exports.createAPicture = (req, res) => {
 
 exports.deleteAPicture = (req, res) => {
     const { user, url } = JSON.parse(req.body.body);
-
+    
     let params = {
         Bucket: process.env.AWS_S3_BUCKET_NAME,
-        Key: url.split("%40")[0] + "@" + url.split("%40")[1] // Split on @=%40 and combine the two
+        Key: url.split("/")[3].split("%40")[0] + "@" + url.split("/")[3].split("%40")[1] // Split on / and @=%40 and combine the two
     }
 
     // Delete object from bucket using the specified parameters outlined above
@@ -131,6 +131,7 @@ exports.deleteAPicture = (req, res) => {
             });
         }
         else {
+            console.log(data);
             UserPicture.deleteOne({ url : url })
             .then(() => {
                 User.updateOne({ email: user.email }, { $set : { numberOfPictures : user.numberOfPictures - 1 }})
