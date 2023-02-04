@@ -35,7 +35,7 @@ const MyPicturesPage = () => {
 
             axios.post("http://localhost:5000/fetch-pictures", options)
             .then(response => {
-                if (response.data.docs.length === 0) {
+                if (response.data.docs.length === 0 && deleteAlert === '') {
                     setEmptyAlert("fetch-pictures-empty");   
                 }
                 updateUserPictures((prevState) => {
@@ -72,7 +72,7 @@ const MyPicturesPage = () => {
             updateUserPictures(prevState => {
                 return {
                     ...prevState,
-                    information: updatePicturesList
+                    information: { docs: updatePicturesList } 
                 }
             });
         }) 
@@ -89,10 +89,10 @@ const MyPicturesPage = () => {
         return (
             <div className='my-pictures-page'>
                 <div className='bg-dark table-container container'>
-                    { deleteAlert !== '' ? <Alert type={ deleteAlert } /> : null } 
                     <h1 style={ styles['h1-searches-label'] }>Your Saved Picture Searches</h1>
                     <p style={ styles.image_list_paragraph }>View your saved pictures</p>
                     { emptyAlert !== '' ? <Alert type={ emptyAlert } /> : null } 
+                    { deleteAlert !== '' ? <Alert type={ deleteAlert } /> : null } 
                     <div className="row">
                         {
                             userPictures.information.docs.map(pic => {

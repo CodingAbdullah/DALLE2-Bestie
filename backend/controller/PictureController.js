@@ -131,9 +131,10 @@ exports.deleteAPicture = (req, res) => {
             });
         }
         else {
-            console.log(data);
+            // Delete picture based on unique URL from UserPicture collection
             UserPicture.deleteOne({ url : url })
             .then(() => {
+                // Update user image saved count after successful UserPicture collection update
                 User.updateOne({ email: user.email }, { $set : { numberOfPictures : user.numberOfPictures - 1 }})
                 .then(() => {
                     res.status(200).json({
