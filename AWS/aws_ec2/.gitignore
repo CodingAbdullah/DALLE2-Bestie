@@ -1,5 +1,0 @@
-# Hiding environment variables here
-.env
-
-# Hiding extensive node modules, download locally using npm install and package.json file
-node_modules
