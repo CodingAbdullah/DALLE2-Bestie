@@ -8,6 +8,8 @@ The creators of ChatGPT have released their beta version of the API responsible 
 All the source code for creating the site from the ground up, front to back, can be found here. For further documentation, please refer to the relevant section on technologies used.
 
 The future is now and the possibilities are endless.
+
+Temporary link to the frontend deployment is here: https://awsbranch.d13w1qxypauqth.amplifyapp.com/
 <br>
 <br>
 
