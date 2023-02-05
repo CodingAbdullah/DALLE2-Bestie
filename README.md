@@ -33,7 +33,7 @@ The future is now and the possibilities are endless.
 
 #### `Tech`
 
-The site uses several technologies and tools. As the project completes, more will be added to this section :
+The site uses several technologies and tools. As the project completes, more will be added to this section:
 
 - [**OpenAI**] - API services are provided by them, validated through the use of keys
 - [**NodeJS**] - Back-end developement, spinning up that Node server for communication
@@ -43,7 +43,7 @@ The site uses several technologies and tools. As the project completes, more wil
 - [**Bootstrap**] - CSS framework for ready-made components
 - [**MongoDB Atlas**] - A cloud based (AWS) Non-Relational Database storage holding our data
 - [**GIT**] - For project version control
-- [**AWS**] - AWS services will/were used for deploying project (AWS Amplify, EC2, Route 53, etc.)
+- [**AWS**] - AWS services will/were used for deploying project (AWS Amplify, S3, EC2, Route 53, etc.)
 - [**Namecheap**] - Domain purchasing
 <br>
 

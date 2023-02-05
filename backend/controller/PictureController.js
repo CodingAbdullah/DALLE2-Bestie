@@ -63,7 +63,7 @@ exports.insertAPicture = (req, res) => {
                 newUserPicture.save()
                 .then(() => {
                     // Update user information using the user object passed in the middleware to request and return
-                    User.updateOne({ email : email }, { $set : { numberOfPictures : user.numberOfPictures + 1, totalStoredPictures: user.totalStoredPictures + 1 }})
+                    User.updateOne({ email : email }, { $set : { numberOfPicturesCurrentlyStored : user.numberOfPicturesCurrentlyStored + 1, totalStoredPictures: user.totalStoredPictures + 1 }})
                     .then(() => {
                         res.status(201).json({
                             message: 'User picture uploaded and count updated'
@@ -135,7 +135,7 @@ exports.deleteAPicture = (req, res) => {
             UserPicture.deleteOne({ url : url })
             .then(() => {
                 // Update user image saved count after successful UserPicture collection update
-                User.updateOne({ email: user.email }, { $set : { numberOfPictures : user.numberOfPictures - 1 }})
+                User.updateOne({ email: user.email }, { $set : { numberOfPicturesCurrentlyStored : user.numberOfPicturesCurrentlyStored - 1 }})
                 .then(() => {
                     res.status(200).json({
                         message: "Successful deletion of image and user image count revised"

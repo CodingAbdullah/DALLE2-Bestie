@@ -32,7 +32,7 @@ exports.signupController = (req, res) => {
                                 });
                             }
                             else {
-                                const newUser = new User({ firstName: firstName, lastName: lastName, email: email, numberOfPictures: 0, totalStoredPictures: 0 , password: hash });
+                                const newUser = new User({ firstName: firstName, lastName: lastName, email: email, numberOfPicturesCurrentlyStored: 0, totalStoredPictures: 0 , password: hash });
                                 newUser.save().then(() => {
                                     res.status(201).json({
                                         message: "User added to db"
