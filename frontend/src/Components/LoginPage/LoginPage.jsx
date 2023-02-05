@@ -32,10 +32,10 @@ const LoginPage = () => {
         dispatch(login({ email, password }));
 
         if (userSelector === null && successSelector && tokenSelector === null){
-            updateLoginAlert('login-user-password-incorrect');
+            updateLoginAlert('login-external-error-or-incorrect');
         }
         else if (errorSelector !== null) {
-            updateLoginAlert('login-external-error');
+            updateLoginAlert('login-external-error-or-incorrect');
         }
     }
 

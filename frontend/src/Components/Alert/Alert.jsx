@@ -7,12 +7,8 @@ const Alert = (props) => {
     let alertType = '';
 
     switch ( type ) {
-        case "login-user-password-incorrect":
-            msg = "Invalid login! Invalid credentials";
-            alertType = 'danger';
-            break;
-        case "login-external-error":
-            msg = "Invalid login, but not due to credentials, an external error was found"
+        case "login-external-error-or-incorrect":
+            msg = "Invalid login due to credentials or an external error was found"
             alertType = 'warning';
             break;
         case "login-success":
