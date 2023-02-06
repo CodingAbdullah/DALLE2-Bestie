@@ -13,7 +13,7 @@ export const styles = {
         'fontStyle' : 'italic'
     },
     'developer_link' : {
-        'color': 'blue'
+        'color': 'yellow'
     },
     'developer_paragraph' : {
         'fontStyle' : 'italic'
@@ -27,6 +27,6 @@ export const styles = {
     'open_ai_link' : {
         'fontStyle' : 'italic',
         'fontWeight' : 'bold',
-        'color' : 'blue'
+        'color' : 'yellow'
     }
 }

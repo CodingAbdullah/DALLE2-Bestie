@@ -13,7 +13,7 @@ export const styles = {
         'fontStyle' : 'italic'
     },
     "paragraph-link" : {
-        'color' : 'blue'
+        'color' : 'yellow'
     },
     "AI-ART-Title" : {
         "marginTop" : '3rem',
