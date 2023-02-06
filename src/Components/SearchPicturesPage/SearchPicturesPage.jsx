@@ -59,7 +59,15 @@ const SearchPicturesPage = () => {
                 'Authorization' : 'Bearer ' + userSelector.token
             }
         };
-        updateURL(''); // Update to empty URL
+       
+       fetch(URL)
+       .then(response => {
+        console.log(response)
+       })
+       .catch(err => {
+        console.log(err);
+       })
+       /* updateURL(''); // Update to empty URL
         
         axios.post("http://localhost:5000/insert-picture", options)
         .then((response) => {
@@ -74,6 +82,7 @@ const SearchPicturesPage = () => {
             dispatch(logout()); // Logout the user immediately if token is invalid or nonexistant and redirect
             navigate("/");
         });
+        */
     }
 
     return (
