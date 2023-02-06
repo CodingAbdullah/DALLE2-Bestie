@@ -50,7 +50,7 @@ const SearchPicturesPage = () => {
         });
     }
 
-    const saveHandler = () => {
+    const saveHandler = async () => {
         const options = {
             method: 'POST',
             body: JSON.stringify({ email: userSelector.user.email, search: imageRequest, url, size: sizeValue }),
@@ -60,13 +60,9 @@ const SearchPicturesPage = () => {
             }
         };
        
-       fetch(URL)
-       .then(response => {
-        console.log(response)
-       })
-       .catch(err => {
-        console.log(err);
-       })
+       const resInfo = await fetch(URL);
+       const buffer = resInfo.buffer();
+       console.log(buffer);
        /* updateURL(''); // Update to empty URL
         
         axios.post("http://localhost:5000/insert-picture", options)
