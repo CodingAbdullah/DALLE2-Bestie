@@ -9,7 +9,7 @@ All the source code for creating the site from the ground up, front to back, can
 
 The future is now and the possibilities are endless.
 
-Temporary link to the frontend deployment is here: https://awsbranch.d13w1qxypauqth.amplifyapp.com/
+Temporary link to the frontend deployment is here: https://dalle2sbestie.com
 <br>
 <br>
 
