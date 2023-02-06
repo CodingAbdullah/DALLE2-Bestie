@@ -66,8 +66,9 @@ For both frontend/backend development of this project, the following libraries w
 - **npm**
 - **OpenAI - DALL·E 2**
 - **react**
-- **redux/toolkit**
 - **react-router**
+- **redux/toolkit**
+- **request**
 - **uuid**
 - **validator**
 <br>
