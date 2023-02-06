@@ -8,6 +8,8 @@ The creators of ChatGPT have released their beta version of the API responsible 
 All the source code for creating the site from the ground up, front to back, can be found here. For further documentation, please refer to the relevant section on technologies used.
 
 The future is now and the possibilities are endless.
+
+Temporary link to the frontend deployment is here: https://dalle2sbestie.com
 <br>
 <br>
 
@@ -23,7 +25,7 @@ The future is now and the possibilities are endless.
 
 - User signin/login/logout supported
 - Security enhanced using salting/hashing passwords
-- Important routes are protected through JWT tokens and are verified to check if they  are valid
+- Important routes are protected through JWT tokens and are verified to check if they are valid
 - Searching and saving images to database supported
 - Fetching past images supported
 - Validating appropriate emails to be registered to database
@@ -33,22 +35,22 @@ The future is now and the possibilities are endless.
 
 #### `Tech`
 
-The site uses several technologies and tools. As the project completes, more will be added to this section:
+The site uses several technologies and tools. **The project is complete, but more features will be added from time to time to this site**:
 
-- [**OpenAI**] - API services are provided by them, validated through the use of keys
-- [**NodeJS**] - Back-end developement, spinning up that Node server for communication
-- [**ExpressJS**] - A minified framework for backend developement, used for creating controllers, interacting with our model and routes
-- [**ReactJS**] - UI library for creating our front-end pages/components, using the latest features
-- [**Redux/Redux Toolkit]** - Create a state container for global state monitoring/maintaining
+- [**OpenAI**] - API services for imaging provided, validated through the use of keys
+- [**NodeJS**] - Back-end development, spinning up the Node server for communication
+- [**ExpressJS**] - A minified framework for backend development, controllers for interacting with model and routes
+- [**ReactJS**] - UI library for creating front-end pages/components, using the latest features
+- [**Redux/Redux Toolkit]** - State container for global state monitoring/maintaining
 - [**Bootstrap**] - CSS framework for ready-made components
-- [**MongoDB Atlas**] - A cloud based (AWS) Non-Relational Database storage holding our data
-- [**GIT**] - For project version control
-- [**AWS**] - AWS services will/were used for deploying project (AWS Amplify, S3, EC2, Route 53, etc.)
+- [**MongoDB Atlas**] - Cloud Based (AWS) Non-Relational Database for storing data
+- [**GIT**] - Project version control
+- [**AWS**] - AWS services for deploying project to cloud (`AWS Amplify`, `EC2`, `Route 53`, `S3`, etc.)
 - [**Namecheap**] - Domain purchasing
 <br>
 
 #### `Javascript Libraries/Dependencies`
-For both frontend/backend development of this project, the following libraries were incorporated. Without which, the development of this site would not be possible.
+For both frontend/backend development of this project, the following libraries were incorporated. Without which, development of this site would not be possible.
 
 - **axios**
 - **aws-sdk**
@@ -64,8 +66,9 @@ For both frontend/backend development of this project, the following libraries w
 - **npm**
 - **OpenAI - DALL·E 2**
 - **react**
-- **redux/toolkit**
 - **react-router**
+- **redux/toolkit**
+- **request**
 - **uuid**
 - **validator**
 <br>
