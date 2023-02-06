@@ -83,7 +83,7 @@ const SignupPage = () => {
                         </div>
                     </div>
                     <div className="bg-dark col-sm-12 col-md-12 text-white col-lg-6 py-5">
-                        <img className="pt-5" src={ require("../../assets/images/signup.png") } alt="No Text" height="400" />
+                        <img className="pt-5" src={ require("../../assets/images/signup.png") } alt="No Text" height="350" />
                     </div>
                 </div>
             </div>
