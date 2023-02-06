@@ -50,7 +50,7 @@ const SearchPicturesPage = () => {
         });
     }
 
-    const saveHandler = async () => {
+    const saveHandler = () => {
         const options = {
             method: 'POST',
             body: JSON.stringify({ email: userSelector.user.email, search: imageRequest, url, size: sizeValue }),
@@ -59,11 +59,7 @@ const SearchPicturesPage = () => {
                 'Authorization' : 'Bearer ' + userSelector.token
             }
         };
-       
-       const resInfo = await fetch(URL);
-       const buffer = resInfo.buffer();
-       console.log(buffer);
-       /* updateURL(''); // Update to empty URL
+        updateURL(''); // Update to empty URL
         
         axios.post("http://localhost:5000/insert-picture", options)
         .then((response) => {
@@ -78,7 +74,6 @@ const SearchPicturesPage = () => {
             dispatch(logout()); // Logout the user immediately if token is invalid or nonexistant and redirect
             navigate("/");
         });
-        */
     }
 
     return (
