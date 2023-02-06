@@ -22,6 +22,9 @@ export const styles = {
         "width" : '50%',
         'marginBottom' : '1rem'
     },
+    "password_link" : {
+        "color" : 'yellow'
+    },
     "login_heading" : {
         'color' : 'yellow'
     },

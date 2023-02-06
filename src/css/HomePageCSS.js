@@ -1,5 +1,5 @@
-// CSS for Home Page
 
+// CSS for Home Page
 export const styles = {
     "home-page-jumbotron" : {
         'paddingTop': '2.5rem', 
@@ -13,7 +13,7 @@ export const styles = {
         'fontStyle' : 'italic'
     },
     "paragraph-link" : {
-        'color' : 'blue'
+        'color' : 'yellow'
     },
     "AI-ART-Title" : {
         "marginTop" : '3rem',
