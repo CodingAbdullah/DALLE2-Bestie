@@ -1,7 +1,7 @@
 // CSS for footer
 export const styles = {
     "react-logo" : {
-        'height': "4.5vmin",
+        'height': "7vmin",
         'pointer-events': 'none'
     },
     "redux-logo" : {

@@ -11,7 +11,7 @@ const HomePage = () => {
         <div className='home-page'>
             <div style={ styles.container } className="container">
                 <div className="row">
-                    <div className="bg-dark col-sm-12 col-md-12 col-lg-6">
+                    <div className="bg-dark col-sm-12 col-md-12 col-lg-12">
                         <div className='d-flex-col text-white bg-dark'>
                             {
                                 userSelector === null || userSelector.firstName === undefined || userSelector.lastName === undefined ? 
@@ -30,13 +30,12 @@ const HomePage = () => {
                                         </>
                                         :
                                         <>
-                                            <button style={ styles['button-login-search'] }className="btn btn-primary" onClick={ () => navigate("/search-pictures") }>Search</button>
+                                            <button style={ styles['button-login-search'] } className="btn btn-primary" onClick={ () => navigate("/search-pictures") }>Search</button>
                                         </>
                                 }
+                                <br />
+                                <img className="p-5" src={ require("../../assets/images/clarinha-robot.gif") } alt="No text" height="350" />
                         </div>
-                    </div>
-                    <div className="bg-dark col-sm-12 col-md-12 text-white col-lg-6 py-5">
-                        <img className="p-5" src={ require("../../assets/images/clarinha-robot.gif") } alt="No text" height="350" />
                     </div>
                 </div>
             </div>
