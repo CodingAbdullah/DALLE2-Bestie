@@ -21,7 +21,7 @@ const HomePage = () => {
                             }
                                 <p className="p-3" style={ styles['home-description-paragraph'] }>
                                     Describe, in your own words, what type of art you are looking for, the size you desire, and this site will
-                                    have it automatically generated for you! Powered by the usual, React.js library and the creative ingenuity brought to life, <b><a target="_blank" rel="noreferrer" style={ styles['paragraph-link'] } href="https://openai.com/dall-e-2/">DALL·E 2</a></b> is your friend and it will do most of the heavy lifting, this site is just a faciliator.</p>
+                                    have it automatically generated for you! Powered by the usual, React.js library and the creative ingenuity, <b><a target="_blank" rel="noreferrer" style={ styles['paragraph-link'] } href="https://openai.com/dall-e-2/">DALL·E 2</a></b> is your friend and it will do most of the heavy lifting, this site is just a faciliator.</p>
                                 <p style={ styles['home-description-paragraph'] }>It would be cringe as a dev, to be taking <b>ALL</b> the credit for it. So what are you waitin' for? Search away!</p>
                                 {
                                     userSelector === null ?
@@ -33,8 +33,6 @@ const HomePage = () => {
                                             <button style={ styles['button-login-search'] } className="btn btn-primary" onClick={ () => navigate("/search-pictures") }>Search</button>
                                         </>
                                 }
-                                <br />
-                                <img className="p-5" src={ require("../../assets/images/clarinha-robot.gif") } alt="No text" height="350" />
                         </div>
                     </div>
                 </div>
