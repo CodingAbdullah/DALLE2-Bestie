@@ -33,7 +33,7 @@ const MyPicturesPage = () => {
                 }
             }
 
-            axios.post("http://localhost:5000/fetch-pictures", options)
+            axios.post("https://3.129.218.32.nip.io/fetch-pictures", options)
             .then(response => {
                 if (response.data.docs.length === 0 && deleteAlert === '') {
                     setEmptyAlert("fetch-pictures-empty");   
@@ -64,7 +64,7 @@ const MyPicturesPage = () => {
             }
         }
 
-        axios.post('http://localhost:5000/delete-picture', options)
+        axios.post('https://3.129.218.32.nip.io/delete-picture', options)
         .then(() => {
             // If delete was successful, remove picture from user picture based on url
             let updatePicturesList = userPictures.information.docs.filter(pic => pic.url !== buttonURL);
