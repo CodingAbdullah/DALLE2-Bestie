@@ -36,9 +36,13 @@ Temporary link to the frontend deployment is here: https://dalle2sbestie.com
 
 ### `Local Environment Architecture`
 <img src="architecture_charts/localdevdiagram.png" alt="LOCAL DEV DIAGRAM" style="height: 600px; width:1000px;"/>
+<br>
+
 
 ### `AWS Environment Architecture`
-<img src="archtecture_charts/awsdiagram.png" alt="AWS DIAGRAM" style="height: 600px; width:1000px;"/>
+<img src="architecture_charts/awsdiagram.png" alt="AWS DIAGRAM" style="height: 600px; width:1000px;"/>
+<br>
+
 
 #### `Tech`
 
