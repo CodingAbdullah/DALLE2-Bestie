@@ -35,7 +35,7 @@ Temporary link to the frontend deployment is here: https://dalle2sbestie.com
 
 
 ### `Local Environment Architecture`
-<img src="localenvdiagram.png" alt="LOCAL DEV DIAGRAM" style="height: 1200px; width:1200px;"/>
+<img src="localenvdiagram.png" alt="LOCAL DEV DIAGRAM" style="height: 600px; width:1000px;"/>
 
 #### `Tech`
 
