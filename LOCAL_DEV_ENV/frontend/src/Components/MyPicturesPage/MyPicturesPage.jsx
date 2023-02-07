@@ -33,7 +33,7 @@ const MyPicturesPage = () => {
                 }
             }
 
-            axios.post("http://localhost:5000/fetch-pictures", options)
+            axios.post("https://3.129.218.32.nip.io/fetch-pictures", options)
             .then(response => {
                 if (response.data.docs.length === 0 && deleteAlert === '') {
                     setEmptyAlert("fetch-pictures-empty");   

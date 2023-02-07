@@ -52,9 +52,10 @@ The site uses several technologies and tools. **The project is complete, but mor
 #### `Javascript Libraries/Dependencies`
 For both frontend/backend development of this project, the following libraries were incorporated. Without which, development of this site would not be possible.
 
-- **axios**
 - **aws-sdk**
+- **axios**
 - **bcryptjs**
+- **caddy**
 - **cors**
 - **dotenv**
 - **express**
@@ -63,6 +64,7 @@ For both frontend/backend development of this project, the following libraries w
 - **mongodb**
 - **mongoose**
 - **nodemailer**
+- **nip**
 - **npm**
 - **OpenAI - DALL·E 2**
 - **react**

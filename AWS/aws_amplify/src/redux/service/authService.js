@@ -14,7 +14,7 @@ const login = async (user) => {
         }
     };
 
-    const response = await axios.post("http://localhost:5000/login", options);
+    const response = await axios.post("https://3.129.218.32.nip.io/login", options);
 
     if (response.data && response.data.message === "Email and password verified!") {
         let userInfo = response.data.user;

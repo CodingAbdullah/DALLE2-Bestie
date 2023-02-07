@@ -40,7 +40,7 @@ const SearchPicturesPage = () => {
         }
 
         // Make use of Open API generate image resource through the backend, passing in credentials and image request
-        axios.post("http://localhost:5000/create-picture", options)
+        axios.post("https://3.129.218.32.nip.io/create-picture", options)
         .then(response => {
             updateURL(response.data.url[0].url);
         })
@@ -61,7 +61,7 @@ const SearchPicturesPage = () => {
         };
         updateURL(''); // Update to empty URL
         
-        axios.post("http://localhost:5000/insert-picture", options)
+        axios.post("https://3.129.218.32.nip.io/insert-picture", options)
         .then((response) => {
             if (response.status === 201){
                 updateSaveAlert('picture-save-success');

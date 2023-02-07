@@ -1,0 +1,7 @@
+# Adding a reverse proxy to send API calls made to the DNS (nip address) to the specific port
+# No need for LetsEncrypt or any other certificate, Caddy takes care of all of it
+
+3.129.218.32.nip.io {
+    reverse_proxy: 127.0.0.1:5001
+
+}
