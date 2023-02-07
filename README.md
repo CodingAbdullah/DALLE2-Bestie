@@ -33,6 +33,10 @@ Temporary link to the frontend deployment is here: https://dalle2sbestie.com
 - Verification codes for verifying password resets are provided by **UUID.V4**
 <br>
 
+
+### `Local Environment Architecture`
+<img src="localenvdiagram.png" alt="LOCAL DEV DIAGRAM" style="height: 300px; width:300px;"/>
+
 #### `Tech`
 
 The site uses several technologies and tools. **The project is complete, but more features will be added from time to time to this site**:
