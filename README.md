@@ -9,7 +9,7 @@ All the source code for creating the site from the ground up, front to back, can
 
 The future is now and the possibilities are endless.
 
-Temporary link to the frontend deployment is here: https://dalle2sbestie.com
+More features will be gradually added to this website but the main parts have already been created and deployed: https://dalle2sbestie.com
 <br>
 <br>
 
