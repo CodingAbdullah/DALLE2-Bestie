@@ -60,6 +60,14 @@ The site uses several technologies and tools. **The project is complete, but mor
 - [**Namecheap**] - Domain purchasing
 <br>
 
+### `Dockerfile`
+Attached within the server folders are Dockerfiles needed to Dockerize the servers and run as standalone containers. This will essentially, allow users to containerize the applications by generating an image to represent the servers and run them as containers.
+<br />
+
+### `Scripts`
+For basic project setup, scripts for each operating system (MAC/WINDOWS) have been provided as bash, powershell scripts respectively.
+<br />
+
 #### `Javascript Libraries/Dependencies`
 For both frontend/backend development of this project, the following libraries were incorporated. Without which, development of this site would not be possible.
 
