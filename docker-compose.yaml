@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  backend:
+    build: /LOCAL_DEV_ENV/backend
+    ports:
+      - 5001:5001
+    env_file: 
+      - /LOCAL_DEV_ENV/backend/.env
+  frontend:
+    build: /LOCAL_DEV_ENV/frontend
+    ports:
+      - 3000:3000
+    tty: true
+    stdin_open: true
+    depends_on:
+      - backend
