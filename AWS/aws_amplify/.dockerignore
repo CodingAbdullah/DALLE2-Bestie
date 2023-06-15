@@ -1,0 +1,4 @@
+# Files/Directories that will not be needed for creating the front-end image
+Dockerfile
+.git
+node_modules

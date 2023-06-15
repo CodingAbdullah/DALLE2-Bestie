@@ -10,6 +10,7 @@ All the source code for creating the site from the ground up, front to back, can
 The future is now and the possibilities are endless.
 
 More features will be gradually added to this website but the main parts have already been created and deployed: https://dalle2sbestie.com
+
 <br>
 <br>
 
@@ -19,6 +20,7 @@ More features will be gradually added to this website but the main parts have al
 - Size of the image you desire (small/medium/large, the only options supported in beta version)
 - And then... viola! The miracle happens ;)
 - Don't thank me for it, I'm just a mere developer, AI is yo bosss
+
 <br>
 
 #### `Additional Features`
@@ -31,6 +33,7 @@ More features will be gradually added to this website but the main parts have al
 - Validating appropriate emails to be registered to database
 - Forgot password feature enabled (**only for GMAIL accounts**) using **Nodemailer**
 - Verification codes for verifying password resets are provided by **UUID.V4**
+
 <br>
 
 
@@ -41,6 +44,7 @@ More features will be gradually added to this website but the main parts have al
 
 ### `AWS Environment Architecture`
 <img src="architecture_charts/awsdiagram.png" alt="AWS DIAGRAM" style="height: 600px; width:1000px;"/>
+
 <br>
 
 
@@ -58,14 +62,19 @@ The site uses several technologies and tools. **The project is complete, but mor
 - [**GIT**] - Project version control
 - [**AWS**] - AWS services for deploying project to cloud (`AWS Amplify`, `EC2`, `Route 53`, `S3`, etc.)
 - [**Namecheap**] - Domain purchasing
+
 <br>
 
 ### `Dockerfile`
 Attached within the server folders are Dockerfiles needed to Dockerize the servers and run as standalone containers. This will essentially, allow users to containerize the applications by generating an image to represent the servers and run them as containers.
+
 <br />
+
 
 ### `Scripts`
 For basic project setup, scripts for each operating system (MAC/WINDOWS) have been provided as bash, powershell scripts respectively.
+
+<br />
 <br />
 
 #### `Javascript Libraries/Dependencies`
@@ -92,6 +101,7 @@ For both frontend/backend development of this project, the following libraries w
 - **request**
 - **uuid**
 - **validator**
+
 <br>
 
 #### `License`
