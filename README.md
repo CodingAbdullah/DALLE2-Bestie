@@ -12,7 +12,6 @@ The future is now and the possibilities are endless.
 More features will be gradually added to this website but the main parts have already been created and deployed: https://dalle2sbestie.com
 
 <br>
-<br>
 
 
 #### `The Process`
