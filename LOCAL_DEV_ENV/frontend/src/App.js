@@ -7,6 +7,7 @@ import HomePage from './Components/HomePage/HomePage';
 import LoginPage from './Components/LoginPage/LoginPage';
 import LogoutPage from './Components/LogoutPage/LogoutPage';
 import SignupPage from './Components/SignupPage/SignupPage';
+import UploadPicturePage from './Components/UploadPicturePage/UploadPicturePage';
 import Footer from './Components/Footer/Footer';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ForgotPasswordPage from './Components/ForgotPasswordPage/ForgotPasswordPage';
@@ -26,6 +27,7 @@ const App = () => {
           <Route exact path="/my-pictures" element={<MyPicturesPage />}></Route>
           <Route exact path="/search-pictures" element={<SearchPicturesPage />}></Route>
           <Route exact path="/signup" element={<SignupPage />}></Route>
+          <Route exact path="/upload-pictures" element={<UploadPicturePage />}></Route>
         </Routes>
       </Router>
       <Footer />
