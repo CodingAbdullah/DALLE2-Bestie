@@ -27,7 +27,7 @@ const ForgotPasswordPage = () => {
                 }
 
                 // Make a backend API call to verify if address exists and notify only gmail accounts supported
-                axios.post("https://3.129.218.32.nip.io/add-email-token", options)
+                axios.post("http://localhost:5001/add-email-token", options)
                 .then((response) => {
                     if (response.status === 200 && response.data.doesExist === false) {
                         updateCodeCreated(false);
@@ -60,7 +60,7 @@ const ForgotPasswordPage = () => {
                     }
                 }
                 // Making a backend API call to verify if user exists and is a gmail
-                axios.post("https://3.129.218.32.nip.io/add-email-token", options)
+                axios.post("http://localhost:5001/add-email-token", options)
                 .then((response) => {
                     if (response.status === 200 && response.data.doesExist === false) {
                         updateCodeCreated(false);
@@ -106,7 +106,7 @@ const ForgotPasswordPage = () => {
         };
 
         // Verify token along with email address
-        axios.post('https://3.129.218.32.nip.io/verify-email-token', options)
+        axios.post('http://localhost:5001/verify-email-token', options)
         .then(response => {
             if (response.status === 200 && !response.data.verified) {
                 updateForgotPasswordAlert('forgot-password-expired-token'); // Token is either expired or used did not enter the right one

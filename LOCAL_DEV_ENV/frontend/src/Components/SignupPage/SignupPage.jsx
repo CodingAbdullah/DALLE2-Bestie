@@ -41,7 +41,7 @@ const SignupPage = () => {
         
         // Client-side validation of email address entered, using third party library
         if (validator.isEmail(email)){
-            axios.post("https://3.129.218.32.nip.io/signup", options)
+            axios.post("http://localhost:5001/signup", options)
             .then((response) => {
             
                 if (response.status === 201) {
