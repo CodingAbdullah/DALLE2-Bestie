@@ -7,6 +7,8 @@ The creators of ChatGPT have released their beta version of the API responsible 
 
 All the source code for creating the site from the ground up, front to back, can be found here. For further documentation, please refer to the relevant section on technologies used.
 
+**API key used for the project has now been upgraded to a specific plan with a x usage limit. This was done for security purposes.**
+
 The future is now and the possibilities are endless.
 
 More features will be gradually added to this website but the main parts have already been created and deployed: https://dalle2sbestie.com
