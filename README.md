@@ -76,7 +76,7 @@ Attached within the server folders are Dockerfiles needed to Dockerize the serve
 For basic project setup, scripts for each operating system (MAC/WINDOWS) have been provided as bash, powershell scripts respectively.
 
 <br />
-<br />
+
 
 #### `Javascript Libraries/Dependencies`
 For both frontend/backend development of this project, the following libraries were incorporated. Without which, development of this site would not be possible.
