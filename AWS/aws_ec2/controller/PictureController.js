@@ -166,3 +166,7 @@ exports.deleteAPicture = (req, res) => {
         }
     });
 }
+
+exports.uploadAPicture = (req, res) => {
+    // Code will go here...
+}

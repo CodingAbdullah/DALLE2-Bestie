@@ -7,5 +7,6 @@ router.post("/fetch-pictures", jwtAuth.verifyJWTMiddleware, pictureController.fe
 router.post("/insert-picture", jwtAuth.verifyJWTMiddleware, pictureController.insertAPicture);
 router.post("/create-picture", jwtAuth.verifyJWTMiddleware, pictureController.createAPicture);
 router.post("/delete-picture", jwtAuth.verifyJWTMiddleware, pictureController.deleteAPicture);
+router.post("/upload-picture", jwtAuth.verifyJWTMiddleware, pictureController.uploadAPicture);
 
 module.exports = router;
