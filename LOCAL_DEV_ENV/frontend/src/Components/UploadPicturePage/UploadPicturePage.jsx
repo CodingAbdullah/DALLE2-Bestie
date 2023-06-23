@@ -13,19 +13,19 @@ const UploadPicturePage = () => {
         // Protected route must be accessed via protected way, access global state store and pass in the user, JWT token values
         let options = {
             method: 'POST',
-            body: JSON.stringify({ file: fileState, email: useSelector.user.email }),
+            body: JSON.stringify({ file: fileState, email: userSelector.user.email }),
             headers : {
                 'content-type' : 'application/json',
                 'Authorization' : 'Bearer ' + userSelector.token
             }
         }
-
+        
         axios.post('http://localhost:5001/upload-picture', options)
         .then(response => {
-            
+            console.log(response.data);
         })
         .catch(err => {
-
+            console.log(err);
         });
     }
 

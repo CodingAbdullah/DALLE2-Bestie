@@ -168,5 +168,17 @@ exports.deleteAPicture = (req, res) => {
 }
 
 exports.uploadAPicture = (req, res) => {
-    // Code will go here...
+    const { file, email } = JSON.parse(req.body.body);
+
+    // More to be added later..
+    if (file === undefined) {
+        res.status(400).json({
+            message: "File is not defined"
+        });
+    }
+    else {
+        res.status(200).json({
+            message: "File is defined"
+        });
+    }
 }
