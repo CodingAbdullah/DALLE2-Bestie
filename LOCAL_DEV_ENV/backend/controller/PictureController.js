@@ -177,8 +177,56 @@ exports.uploadAPicture = (req, res) => {
         });
     }
     else {
-        res.status(200).json({
-            message: "File is defined"
+        User.find( { email } , (err, docs) => {
+            if (!err) {
+                // Fetch the number of pictures stored and use this value to be updated later
+                let totalNumberOfUserPicturesStored = docs[0].numberOfPicturesCurrentlyStored;
+
+                let params = {
+                    Bucket: process.env.AWS_S3_BUCKET_NAME, 
+                    Key: email + totalNumberOfUserPicturesStored + 1, // Increase the count of pictures stored by 1
+                    Body: file,
+                    ContentType: response.headers['content-type']
+                };
+
+                // Pictures that are successfully uploaded to the AWS S3 bucket will have a default search, size -  "", small respectively
+                S3.upload(params, (err, data) => {
+                    if(!err) {
+                        // Create a new picture document and save to MongoDB 
+                        let newUserPicture = new UserPicture({ email, search: "", size: "small", url : data.Location });
+                        
+                        newUserPicture.save()
+                        .then(() => {
+                            User.updateOne( { email : email }, { $set : { numberOfPicturesCurrentlyStored : totalNumberOfUserPicturesStored + 1 }}) // Update count in User model
+                            .then(() => {
+                                res.status(201).json({
+                                    message: "Successfully, upload image to AWS and updated User, UserPicture models to reflect, picture information and count"
+                                });
+                            })
+                            .catch(() => {
+                                res.status(400).json({
+                                    message: "Cannot update user's number of pictures data"
+                                });
+                            });
+                        })
+                        .catch(() => {
+                            res.status(400).json({
+                                message: "Could not save new picture to database"
+                            });
+                        });
+                    }
+                    else {
+                        res.status(400).json({
+                            message: "Could not upload image to S3 bucket"
+                        });
+                    }
+                });
+            }
+            else {
+                res.status(400).json({
+                    message: "Cannot find User"
+                });
+            }
         });
     }
 }
