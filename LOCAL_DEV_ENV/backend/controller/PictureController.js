@@ -171,7 +171,7 @@ exports.uploadAPicture = (req, res) => {
     const { file, email } = JSON.parse(req.body.body);
 
     // More to be added later..
-    if (file === undefined) {
+    if (file === undefined || email === undefined) {
         res.status(400).json({
             message: "File is not defined"
         });
