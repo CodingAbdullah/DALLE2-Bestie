@@ -168,5 +168,65 @@ exports.deleteAPicture = (req, res) => {
 }
 
 exports.uploadAPicture = (req, res) => {
-    // Code will go here...
+    const { fileSize, fileTitle, user } = JSON.parse(req.body.body);
+    let fileData = req.files.picture; // Will always be defined, as part of the key-value pair assigned
+
+    // More to be added later..
+    if (fileData === undefined || user.email === undefined) {
+        res.status(400).json({
+            message: "File is not defined"
+        });
+    }
+    else {
+        User.find( { email: user.email } , (err, docs) => {
+            if (!err) {
+                // Fetch the number of pictures stored and use this value to be updated later
+                let totalNumberOfUserPicturesStored = docs[0].numberOfPicturesCurrentlyStored;
+
+                let params = {
+                    Bucket: process.env.AWS_S3_BUCKET_NAME, 
+                    Key: user.email + totalNumberOfUserPicturesStored + 1, // Increase the count of pictures stored by 1
+                    Body: fileData.data
+                };
+
+                // Pictures that are successfully uploaded to the AWS S3 bucket will have a default search, size -  "", small respectively
+                S3.upload(params, (err, data) => {
+                    if(!err) {
+                        // Create a new picture document and save to MongoDB 
+                        let newUserPicture = new UserPicture({ email: user.email, search: fileTitle, size: fileSize, url : data.Location });
+                        
+                        newUserPicture.save()
+                        .then(() => {
+                            User.updateOne( { email : user.email }, { $set : { numberOfPicturesCurrentlyStored : totalNumberOfUserPicturesStored + 1, totalStoredPictures: docs[0].totalStoredPictures + 1 }}) // Update count in User model
+                            .then(() => {
+                                res.status(201).json({
+                                    message: "Successfully, upload image to AWS and updated User, UserPicture models to reflect, picture information and count"
+                                });
+                            })
+                            .catch(() => {
+                                res.status(400).json({
+                                    message: "Cannot update user's number of pictures data"
+                                });
+                            });
+                        })
+                        .catch(() => {
+                            res.status(400).json({
+                                message: "Could not save new picture to database"
+                            });
+                        });
+                    }
+                    else {
+                        res.status(400).json({
+                            message: "Could not upload image to S3 bucket"
+                        });
+                    }
+                });
+            }
+            else {
+                res.status(400).json({
+                    message: "Cannot find User"
+                });
+            }
+        });
+    }
 }
