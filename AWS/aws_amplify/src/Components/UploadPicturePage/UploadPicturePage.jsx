@@ -41,7 +41,7 @@ const UploadPicturePage = () => {
         }
         
         // Uploading picture using form data
-        axios.post('http://localhost:5001/upload-picture', formData, options)
+        axios.post('https://3.129.218.32.nip.io/upload-picture', formData, options)
         .then(() => {
             updateFileCheck(true); // Update file checks
             updateAlert('upload-success');
