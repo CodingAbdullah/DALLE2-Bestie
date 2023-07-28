@@ -168,7 +168,8 @@ exports.deleteAPicture = (req, res) => {
 }
 
 exports.uploadAPicture = (req, res) => {
-    const { file } = JSON.parse(req.body.body);
+    const { user } = JSON.parse(req.body.body);
+    let fileData = req.files.picture; // Will always be defined, as part of the key-value pair assigned
 
     // More to be added later..
     if (fileData === undefined || user.email === undefined) {
@@ -185,18 +186,18 @@ exports.uploadAPicture = (req, res) => {
                 let params = {
                     Bucket: process.env.AWS_S3_BUCKET_NAME, 
                     Key: user.email + totalNumberOfUserPicturesStored + 1, // Increase the count of pictures stored by 1
-                    Body: fileData
+                    Body: fileData.data
                 };
 
                 // Pictures that are successfully uploaded to the AWS S3 bucket will have a default search, size -  "", small respectively
                 S3.upload(params, (err, data) => {
                     if(!err) {
                         // Create a new picture document and save to MongoDB 
-                        let newUserPicture = new UserPicture({ email: user.email, search: "", size: "small", url : data.Location });
+                        let newUserPicture = new UserPicture({ email: user.email, search: "--- UPLOADED ---", size: "small", url : data.Location });
                         
                         newUserPicture.save()
                         .then(() => {
-                            User.updateOne( { email : user.email }, { $set : { numberOfPicturesCurrentlyStored : totalNumberOfUserPicturesStored + 1 }}) // Update count in User model
+                            User.updateOne( { email : user.email }, { $set : { numberOfPicturesCurrentlyStored : totalNumberOfUserPicturesStored + 1, totalStoredPictures: docs[0].totalStoredPictures + 1 }}) // Update count in User model
                             .then(() => {
                                 res.status(201).json({
                                     message: "Successfully, upload image to AWS and updated User, UserPicture models to reflect, picture information and count"

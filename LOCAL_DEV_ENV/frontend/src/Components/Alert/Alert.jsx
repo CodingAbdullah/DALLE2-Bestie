@@ -71,6 +71,14 @@ const Alert = (props) => {
             msg = "Requested picture was deleted"
             alertType = 'success';
             break;
+        case "upload-success":
+            msg = "Request picture was successfully uploaded!"
+            alertType = 'success';
+            break;
+        case "upload-error":
+            msg = "Requested picture could not be uploaded!"
+            alertType = 'warning';
+            break;
         default:
             break;
     }
