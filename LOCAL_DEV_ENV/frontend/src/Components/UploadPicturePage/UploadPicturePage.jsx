@@ -1,26 +1,49 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { styles } from '../../css/SignupPageCSS';
+import axios from 'axios';
 
 const UploadPicturePage = () => {
-    const [fileState, uploadFile] = useState(null);
+    const [fileState, uploadFile] = useState({
+        fileInformation: null
+    });
+
+    // Hooks to be used to gather information for navigating and checking global state
     const userSelector = useSelector(state => state.auth.user);
+    const navigate = useNavigate();
 
-    const uploadHandler = (e) => {
-        e.preventDefault();
+    // If token does not exist, redirect to home
+    useEffect(() => {
+        if (userSelector.token === null) {
+            navigate("/");
+        }
+    }, []);
 
-        // Protected route must be accessed via protected way, access global state store and pass in the user, JWT token values
-        let options = {
-            method: 'POST',
-            body: JSON.stringify({ file: fileState, email: userSelector.user.email }),
+    // File handler function for updating file state
+    const fileHandler = (e) => {
+        uploadFile(prevState => { 
+            return { 
+                ...prevState, 
+                fileInformation: e.target.files[0] 
+            } 
+        });
+    }
+
+    const uploadHandler = () => {
+        // Append file data to object
+        const formData = new FormData();
+        formData.append('file', fileState.fileInformation, fileState.fileInformation.name);
+
+        // Protected route must be accessed via protected way, access global state store and pass in the user
+        let config = {
             headers : {
-                'content-type' : 'application/json',
                 'Authorization' : 'Bearer ' + userSelector.token
             }
         }
         
-        axios.post('http://localhost:5001/upload-picture', options)
+        // Uploading picture using back-end endpoint
+        axios.post('http://localhost:5001/upload-picture', formData, config)
         .then(response => {
             console.log(response.data);
         })
@@ -35,15 +58,13 @@ const UploadPicturePage = () => {
                  <div className="row">
                     <div className="bg-dark col-sm-12 col-md-12 col-lg-6">
                         <div className='d-flex-col text-white px-3 py-5'>
-                            <form onSubmit={ uploadHandler }>
-                                <h2 style={ styles['signup'] }>Upload Image</h2>
-                                <p style={ styles['signup-description'] }>Select a picture that you'd like to upload and save to your account</p>
-                                <div className="mb-3">
-                                    <label className="form-label">Select file to upload: </label>
-                                    <input className="form-control" type="file" onClick={ e => uploadFile(e.target.files[0]) } />
-                                </div>
-                                <button style={ styles['signup-button'] } type="submit" className='btn btn-primary'>Upload Picture</button>
-                            </form>                                
+                            <h2 style={ styles['signup'] }>Upload Image</h2>
+                            <p style={ styles['signup-description'] }>Select a picture that you'd like to upload and save to your account</p>
+                            <div className="mb-3">
+                                <label className="form-label">Select file to upload: </label>
+                                <input className="form-control" type="file" name="file" accept='image/png, image/jpeg' onChange={ e => fileHandler(e) } />
+                            </div>
+                            <button style={ styles['signup-button'] } type="button" onClick={ uploadHandler } className='btn btn-primary'>Upload Picture</button>
                         </div>
                     </div>
                 </div>

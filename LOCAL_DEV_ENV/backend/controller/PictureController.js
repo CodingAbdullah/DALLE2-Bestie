@@ -168,36 +168,35 @@ exports.deleteAPicture = (req, res) => {
 }
 
 exports.uploadAPicture = (req, res) => {
-    const { file, email } = JSON.parse(req.body.body);
+    const { file } = JSON.parse(req.body.body);
 
     // More to be added later..
-    if (file === undefined || email === undefined) {
+    if (fileData === undefined || user.email === undefined) {
         res.status(400).json({
             message: "File is not defined"
         });
     }
     else {
-        User.find( { email } , (err, docs) => {
+        User.find( { email: user.email } , (err, docs) => {
             if (!err) {
                 // Fetch the number of pictures stored and use this value to be updated later
                 let totalNumberOfUserPicturesStored = docs[0].numberOfPicturesCurrentlyStored;
 
                 let params = {
                     Bucket: process.env.AWS_S3_BUCKET_NAME, 
-                    Key: email + totalNumberOfUserPicturesStored + 1, // Increase the count of pictures stored by 1
-                    Body: file,
-                    ContentType: response.headers['content-type']
+                    Key: user.email + totalNumberOfUserPicturesStored + 1, // Increase the count of pictures stored by 1
+                    Body: fileData
                 };
 
                 // Pictures that are successfully uploaded to the AWS S3 bucket will have a default search, size -  "", small respectively
                 S3.upload(params, (err, data) => {
                     if(!err) {
                         // Create a new picture document and save to MongoDB 
-                        let newUserPicture = new UserPicture({ email, search: "", size: "small", url : data.Location });
+                        let newUserPicture = new UserPicture({ email: user.email, search: "", size: "small", url : data.Location });
                         
                         newUserPicture.save()
                         .then(() => {
-                            User.updateOne( { email : email }, { $set : { numberOfPicturesCurrentlyStored : totalNumberOfUserPicturesStored + 1 }}) // Update count in User model
+                            User.updateOne( { email : user.email }, { $set : { numberOfPicturesCurrentlyStored : totalNumberOfUserPicturesStored + 1 }}) // Update count in User model
                             .then(() => {
                                 res.status(201).json({
                                     message: "Successfully, upload image to AWS and updated User, UserPicture models to reflect, picture information and count"
