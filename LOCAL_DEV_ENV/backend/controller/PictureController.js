@@ -168,7 +168,7 @@ exports.deleteAPicture = (req, res) => {
 }
 
 exports.uploadAPicture = (req, res) => {
-    const { user } = JSON.parse(req.body.body);
+    const { fileSize, fileTitle, user } = JSON.parse(req.body.body);
     let fileData = req.files.picture; // Will always be defined, as part of the key-value pair assigned
 
     // More to be added later..
@@ -193,7 +193,7 @@ exports.uploadAPicture = (req, res) => {
                 S3.upload(params, (err, data) => {
                     if(!err) {
                         // Create a new picture document and save to MongoDB 
-                        let newUserPicture = new UserPicture({ email: user.email, search: "--- UPLOADED ---", size: "small", url : data.Location });
+                        let newUserPicture = new UserPicture({ email: user.email, search: fileTitle, size: fileSize, url : data.Location });
                         
                         newUserPicture.save()
                         .then(() => {

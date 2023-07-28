@@ -42,8 +42,11 @@ exports.verifyJWTMiddleware = (req, res, next) => {
 }
 
 exports.verifyFileUploadRouteJWTMiddleware = (req, res, next) => {
+    // Setting variables for extracting header values
     let tokenExists = false;
     let tokenValue = '';
+    let fileSize = '';
+    let fileTitle = '';
 
     // Iterate through the headers and find Authorization..
     for (var i = 0 ; i < req.rawHeaders.length; i++) {
@@ -54,6 +57,16 @@ exports.verifyFileUploadRouteJWTMiddleware = (req, res, next) => {
         }
         else {
             continue;
+        }
+    }
+
+    // Extract file size and title from headers
+    for (var j = 0; j < req.rawHeaders.length; j++){
+        if (req.rawHeaders[j] === 'Header-File-Size'){
+            fileSize = req.rawHeaders[j + 1];
+        }
+        if (req.rawHeaders[j] === 'Header-File-Title'){
+            fileTitle = req.rawHeaders[j + 1];
         }
     }
     
@@ -87,6 +100,8 @@ exports.verifyFileUploadRouteJWTMiddleware = (req, res, next) => {
                             // If authenticated, move to the next piece of middleware and add user to req object
                             let ogReq = {};
                             ogReq.user = docs[0];
+                            ogReq.fileSize = fileSize;
+                            ogReq.fileTitle = fileTitle;
                             req.body.body = JSON.stringify(ogReq);
                             next();
                         }
