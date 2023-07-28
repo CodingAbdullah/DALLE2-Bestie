@@ -37,7 +37,6 @@ More features will be gradually added to this website but the main parts have al
 
 <br>
 
-
 ### `Local Environment Architecture`
 <img src="architecture_charts/localdevdiagram.png" alt="LOCAL DEV DIAGRAM" style="height: 600px; width:1000px;"/>
 <br>
@@ -88,6 +87,7 @@ For both frontend/backend development of this project, the following libraries w
 - **cors**
 - **dotenv**
 - **express**
+- **express-fileupload**
 - **jsonwebtoken**
 - **localstorage**
 - **mongodb**
