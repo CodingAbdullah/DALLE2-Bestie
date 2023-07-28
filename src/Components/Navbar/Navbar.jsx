@@ -23,6 +23,9 @@ const Navbar = () => {
             <li className="nav-item">
                 <a style={ styles['link-disabled'] } className="nav-link disabled" href="/my-pictures">My Pictures</a>
             </li>
+            <li className="nav-item">
+                <a style={ styles['link-disabled'] } className="nav-link disabled" href="/upload-pictures">Upload Pictures</a>
+            </li>
         </> :
         <>                        
             <li className="nav-item">
@@ -36,6 +39,9 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
                 <a style={ styles['link-enabled'] } className="nav-link" href="/my-pictures">My Pictures</a>
+            </li>
+            <li className="nav-item">
+                <a style={ styles['link-enabled'] } className="nav-link" href="/upload-pictures">Upload Pictures</a>
             </li>
         </>
 
