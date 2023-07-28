@@ -7,7 +7,7 @@ const pictureRoute = require("./routes/pictureRoute");
 const emailTokenRoute = require("./routes/emailTokenRoute");
 const mongoose = require("mongoose");
 const URI = "mongodb+srv://owner:" + process.env.DB_PASSWORD + "@ai-user-database.zjlsn9q.mongodb.net/?retryWrites=true&w=majority";
-
+const expressFileUpload = require('express-fileupload');
 const app = express();
 
 app.listen(process.env.PORT || 8080, 'localhost', () => {
@@ -26,6 +26,7 @@ app.use(express.json({ extended: false }));
 app.use(express.urlencoded({ extended: false }));
 
 app.use(cors()); // Enabling CORS
+app.use(expressFileUpload()); // File upload middleware added
 app.use("/", loginRoute);
 app.use("/", signupRoute);
 app.use("/", pictureRoute); // Pass in auth middleware for protected routes. JWT verification will be required
