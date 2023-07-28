@@ -55,8 +55,8 @@ const UploadPicturePage = () => {
     return (
         <div className='signup-page'>
             <div style={ styles['signup-page-jumbotron'] } className="container">
-                 <div className="row">
-                    <div className="bg-dark col-sm-12 col-md-12 col-lg-6">
+                 <div style={{ marginLeft: 'auto', marginRight: 'auto', width: '50%' }} className="row">
+                    <div className="bg-dark col-sm-12 col-md-12 col-lg-12">
                         <div className='d-flex-col text-white px-3 py-5'>
                             <h2 style={ styles['signup'] }>Upload Image</h2>
                             <p style={ styles['signup-description'] }>Select a picture that you would like to upload and save to your account</p>
